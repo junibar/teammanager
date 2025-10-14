@@ -471,7 +471,7 @@ document.getElementById("addPlayerBtn").addEventListener("click",()=>{
   refreshRosterTable(); saveAll(); draw();
 });
 document.getElementById("bulkAddBtn").addEventListener("click",()=>{
-  const hint="한 줄에 한 명씩: 이름, 포지션(GK/DF/MF/FW), 구분(FIRST/SUB), 타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE), (선택)이모지(⭐/🔹/🩶/💗), (선택)OVR\n예)\nHaaland, FW, FIRST, ICON, ⭐, 90\nSon, FW, FIRST, TAEGUEK, 🔹, 87\nLee Kang-in, MF, FIRST, AMIGO, 🩶, 82\nWonderkid, MF, SUB, FUTURE, 💗, 78";
+  const hint="한 줄에 한 명씩: 이름, OVR, 포지션(GK/DF/MF/FW), 구분(FIRST/SUB), 타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE),\n예)\nHaaland, 91, FW, FIRST";
   const txt=prompt(hint,""); if(!txt) return; const t=currentTeamObj();
   txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).forEach(line=>{
     const parts=line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());
