@@ -87,6 +87,22 @@ canvas{display:block;width:100%;height:100%}.drag{cursor:grab;user-select:none;c
   </div></section>
 </main>
 
+  <!-- Bulk Add Modal -->
+<div id="bulkModal" class="modal" aria-hidden="true">
+  <div class="panel">
+    <h3 style="margin:2px 0 12px 0">선수 대량 추가</h3>
+    <p class="muted" style="margin:0 0 8px 0">
+      여러 선수는 <b>줄바꿈</b> 또는 <b>세미콜론(;)</b>으로 구분합니다.<br/>
+      형식: <code>이름, OVR, 포지션(GK/DF/MF/FW), 선수타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE)</code>
+    </p>
+    <textarea id="bulkTextarea" rows="8" style="width:100%;resize:vertical;background:#0f1622;color:#e9eef6;border:1px solid #293748;border-radius:8px;padding:10px"></textarea>
+    <div class="row" style="margin-top:12px;justify-content:flex-end">
+      <button id="bulkCancelBtn" class="ghost">취소(Esc)</button>
+      <button id="bulkConfirmBtn" class="good">추가(Ctrl/⌘+Enter)</button>
+    </div>
+  </div>
+</div>
+  
 <!-- Settings Modal -->
 <div id="settingsModal" class="modal" aria-hidden="true"><div class="panel">
   <h3 style="margin:2px 0 12px 0">GitHub 저장 설정</h3>
@@ -268,9 +284,45 @@ function idxInRoster(team, playerObj){
 
   // add / bulk
   on(qs("#addPlayerBtn"),"click",()=>{curT().roster.push({name:"",pos:"DF",first:"SUB",ovr:70,type:"NORMAL",emoji:""});refreshRoster();saveAll();draw()});
-  on(qs("#bulkAddBtn"),"click",()=>{
-  const hint = "한 줄에 한 명씩: 이름, OVR, 포지션(GK/DF/MF/FW), 선수타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE)\n예) Van der Sar, 75, GK, NORMAL";
-  const txt = prompt(hint, "");
+
+// --- 대량 추가 모달 컨트롤 ---
+const bulkModal = qs("#bulkModal");
+const bulkTA    = qs("#bulkTextarea");
+const bulkOpen  = ()=>{ bulkTA.value=""; bulkModal.style.display="flex"; setTimeout(()=>bulkTA.focus(), 0); };
+const bulkClose = ()=>{ bulkModal.style.display="none"; };
+
+function bulkParseAndInsert(text){
+  if(!text) return;
+  const t = curT();
+  // 플레이어 구분: 줄바꿈 또는 ';'
+  const rows = text.split(/[\r\n;]+/).map(s=>s.trim()).filter(Boolean);
+  rows.forEach(line=>{
+    // 필드 구분: 콤마/탭/2칸 이상 공백
+    const parts = line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());
+    const [name, ovrStr, pos, type] = parts;
+    const T = (type||"NORMAL").toUpperCase();
+    t.roster.push({
+      name: name||"",
+      ovr: Math.max(1, Math.min(99, Number(ovrStr)||70)),
+      pos: (pos||"DF").toUpperCase(),
+      first: "SUB",                 // 대량 추가는 기본 SUB
+      type: T,
+      emoji: TYPE_EMOJI[T] || ""    // 고정 이모지(⭐/🔹/➕/💗)
+    });
+  });
+  refreshRoster(); saveAll(); draw();
+}
+
+on(qs("#bulkAddBtn"), "click", () => bulkOpen());
+on(qs("#bulkConfirmBtn"), "click", () => { bulkParseAndInsert(bulkTA.value); bulkClose(); });
+on(qs("#bulkCancelBtn"),  "click", () => bulkClose());
+window.addEventListener("keydown", (e)=>{
+  if(bulkModal.style.display==="flex"){
+    if(e.key==="Escape"){ e.preventDefault(); bulkClose(); }
+    if((e.ctrlKey||e.metaKey) && e.key==="Enter"){ e.preventDefault(); qs("#bulkConfirmBtn").click(); }
+  }
+});
+  
   if(!txt) return;
   const t = curT();
   txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).forEach(line=>{
