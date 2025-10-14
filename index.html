@@ -80,7 +80,9 @@ canvas{display:block;width:100%;height:100%}.drag{cursor:grab;user-select:none;c
         <button id="forceReflowBtn" class="ghost">강제 재배치</button>
       </div>
       <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">SUB 명단 (최대 10명)</h3>
-      <table id="subsTable"><thead><tr><th style="width:40%">이름</th><th style="width:20%">포지션</th><th style="width:20%">OVR</th><th style="width:20%">선수타입</th></tr></thead><tbody></tbody></table>
+      <table id="subsTable"><thead><tr>
+  <th style="width:38%">이름</th><th style="width:18%">포지션</th><th style="width:18%">OVR</th><th style="width:18%">선수타입</th><th style="width:8%"></th>
+</tr></thead><tbody></tbody></table>
     </div>
   </div></section>
 </main>
@@ -104,6 +106,8 @@ canvas{display:block;width:100%;height:100%}.drag{cursor:grab;user-select:none;c
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // --- helpers
+  // ⬇︎ 고정 이모지 매핑 (아미고=➕, 태극=🔹, 아이콘=⭐, 퓨쳐=💗)
+  const TYPE_EMOJI = { ICON:"⭐", TAEGUEK:"🔹", AMIGO:"➕", FUTURE:"💗", NORMAL:"" };
   const qs = s => document.querySelector(s);
   const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
   const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
@@ -157,10 +161,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // roster table
   const tbody=qs("#rosterTable tbody");
-  function refreshRoster(){const t=curT();tbody.innerHTML="";(t.roster||[]).forEach((p,idx)=>{const tr=document.createElement("tr");tr.draggable=true;tr.innerHTML=`<td class="drag w-del">≡</td><td class="w-num">${idx+1}</td><td class="w-name"><input type="text" value="${p.name??""}"></td><td class="w-ovr"><input type="number" min="1" max="99" value="${p.ovr??70}"></td><td class="w-pos"><select><option>GK</option><option>DF</option><option>MF</option><option>FW</option></select></td><td class="w-first"><select><option>FIRST</option><option>SUB</option></select></td><td class="w-type"><div class="typeWrap"><select class="ptype"><option value="NORMAL">일반</option><option value="ICON">아이콘</option><option value="TAEGUEK">태극</option><option value="AMIGO">아미고</option><option value="FUTURE">퓨쳐</option></select><input class="emoji" type="text" maxlength="2" placeholder="⭐/🔹/🩶/💗"/></div></td><td class="w-del"><button class="ghost">-</button></td>`;const nameEl=tr.children[2].firstElementChild,ovrEl=tr.children[3].firstElementChild,posSel=tr.children[4].firstElementChild,firstSel=tr.children[5].firstElementChild,typeSel=tr.querySelector(".ptype"),emojiEl=tr.querySelector(".emoji"),delBtn=tr.children[7].firstElementChild;posSel.value=p.pos||"DF";firstSel.value=p.first||"SUB";typeSel.value=p.type||"NORMAL";if(!p.emoji){if(p.type==="ICON")p.emoji="⭐";else if(p.type==="TAEGUEK")p.emoji="🔹";else if(p.type==="AMIGO")p.emoji="🩶";else if(p.type==="FUTURE")p.emoji="💗"}emojiEl.value=p.emoji||"";emojiEl.style.display=(["ICON","TAEGUEK","AMIGO","FUTURE"].includes(typeSel.value))?"block":"none";nameEl.addEventListener("input",()=>{p.name=nameEl.value;saveAll();draw()});ovrEl.addEventListener("change",()=>{p.ovr=Math.max(1,Math.min(99,Number(ovrEl.value)||70));saveAll();draw()});posSel.addEventListener("change",()=>{p.pos=posSel.value;saveAll();draw()});firstSel.addEventListener("change",()=>{p.first=firstSel.value;saveAll();draw()});typeSel.addEventListener("change",()=>{p.type=typeSel.value;if(typeSel.value==="ICON"&&!p.emoji)p.emoji="⭐";if(typeSel.value==="TAEGUEK"&&!p.emoji)p.emoji="🔹";if(typeSel.value==="AMIGO"&&!p.emoji)p.emoji="🩶";if(typeSel.value==="FUTURE"&&!p.emoji)p.emoji="💗";emojiEl.style.display=(["ICON","TAEGUEK","AMIGO","FUTURE"].includes(typeSel.value))?"block":"none";emojiEl.value=p.emoji||"";saveAll();draw()});emojiEl.addEventListener("input",()=>{p.emoji=emojiEl.value;saveAll();draw()});delBtn.addEventListener("click",()=>{t.roster.splice(idx,1);refreshRoster();saveAll();draw()});tr.addEventListener("dragstart",(e)=>{e.dataTransfer.setData("text/plain",String(idx));tr.style.opacity=.5});tr.addEventListener("dragend",()=>{tr.style.opacity=""});tr.addEventListener("dragover",(e)=>{e.preventDefault();tr.style.outline="1px dashed #3a4a66"});tr.addEventListener("dragleave",()=>{tr.style.outline=""});tr.addEventListener("drop",(e)=>{e.preventDefault();tr.style.outline="";const from=Number(e.dataTransfer.getData("text/plain"));const to=idx;if(Number.isInteger(from)&&from!==to){const arr=t.roster;const moved=arr.splice(from,1)[0];arr.splice(to,0,moved);refreshRoster();saveAll();draw()}});tbody.appendChild(tr)})}
+  function refreshRoster(){const t=curT();tbody.innerHTML="";(t.roster||[]).forEach((p,idx)=>{const tr=document.createElement("tr");tr.draggable=true;tr.innerHTML=`<td class="drag w-del">≡</td><td class="w-num">${idx+1}</td><td class="w-name"><input type="text" value="${p.name??""}"></td><td class="w-ovr"><input type="number" min="1" max="99" value="${p.ovr??70}"></td><td class="w-pos"><select><option>GK</option><option>DF</option><option>MF</option><option>FW</option></select></td><td class="w-first"><select><option>FIRST</option><option>SUB</option></select></td><td class="w-type"><div class="typeWrap"><select class="ptype"><option value="NORMAL">일반</option><option value="ICON">아이콘</option><option value="TAEGUEK">태극</option><option value="AMIGO">아미고</option><option value="FUTURE">퓨쳐</option></select><input class="emoji" type="text" maxlength="2" placeholder="⭐/🔹/🩶/💗"/></div></td><td class="w-del"><button class="ghost">-</button></td>`;const nameEl=tr.children[2].firstElementChild,ovrEl=tr.children[3].firstElementChild,posSel=tr.children[4].firstElementChild,firstSel=tr.children[5].firstElementChild,typeSel=tr.querySelector(".ptype"),emojiEl=tr.querySelector(".emoji"),delBtn=tr.children[7].firstElementChild;posSel.value=p.pos||"DF";firstSel.value=p.first||"SUB";typeSel.value=p.type||"NORMAL";// 🔒 고정 이모지 적용 + 입력 잠금
+p.emoji = TYPE_EMOJI[p.type || "NORMAL"] || "";
+emojiEl.value = p.emoji;
+emojiEl.readOnly = true;      // 사용자가 바꿀 수 없게
+emojiEl.style.opacity = 0.7;  // 잠금 느낌만 살짝 (선택 사항)
+emojiEl.style.display=(["ICON","TAEGUEK","AMIGO","FUTURE"].includes(typeSel.value))?"block":"none";nameEl.addEventListener("input",()=>{p.name=nameEl.value;saveAll();draw()});ovrEl.addEventListener("change",()=>{p.ovr=Math.max(1,Math.min(99,Number(ovrEl.value)||70));saveAll();draw()});posSel.addEventListener("change",()=>{p.pos=posSel.value;saveAll();draw()});firstSel.addEventListener("change",()=>{p.first=firstSel.value;saveAll();draw()});typeSel.addEventListener("change", ()=>{
+  p.type  = typeSel.value;
+  p.emoji = TYPE_EMOJI[p.type] || "";  // 타입과 항상 동기화
+  emojiEl.value = p.emoji;             // 표시값 갱신
+  saveAll(); draw();
+});
+delBtn.addEventListener("click",()=>{t.roster.splice(idx,1);refreshRoster();saveAll();draw()});tr.addEventListener("dragstart",(e)=>{e.dataTransfer.setData("text/plain",String(idx));tr.style.opacity=.5});tr.addEventListener("dragend",()=>{tr.style.opacity=""});tr.addEventListener("dragover",(e)=>{e.preventDefault();tr.style.outline="1px dashed #3a4a66"});tr.addEventListener("dragleave",()=>{tr.style.outline=""});tr.addEventListener("drop",(e)=>{e.preventDefault();tr.style.outline="";const from=Number(e.dataTransfer.getData("text/plain"));const to=idx;if(Number.isInteger(from)&&from!==to){const arr=t.roster;const moved=arr.splice(from,1)[0];arr.splice(to,0,moved);refreshRoster();saveAll();draw()}});tbody.appendChild(tr)})}
+
+  // SUB 항목끼리만 위/아래 스왑
+function moveSubByOne(team, subRosterIndex, dir){ // dir: -1(위), +1(아래)
+  const r = team.roster;
+  // 현재 SUB들의 인덱스를 나열
+  const subIdxs = r.map((p,i)=>({p,i})).filter(x=>x.p.first!=="FIRST").map(x=>x.i);
+  const posInSubs = subIdxs.indexOf(subRosterIndex);
+  if (posInSubs === -1) return false;
+
+  const targetPos = posInSubs + dir;
+  if (targetPos < 0 || targetPos >= subIdxs.length) return false;
+
+  const a = subIdxs[posInSubs];
+  const b = subIdxs[targetPos];
+  // roster에서 두 원소 스왑
+  const tmp = r[a]; r[a] = r[b]; r[b] = tmp;
+  return true;
+}
+function idxInRoster(team, playerObj){
+  return team.roster.findIndex(x=>x===playerObj);
+}
 
   // subs panel
-  function refreshSubs(){const subs=(curT().roster||[]).filter(p=>p.first!=="FIRST").slice(0,10);const tb=qs("#subsTable tbody");tb.innerHTML="";if(subs.length===0){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=4;td.textContent='SUB 명단이 비어 있습니다.';td.style.color='#8aa0b6';tr.appendChild(td);tb.appendChild(tr);return}subs.forEach(p=>{const tr=document.createElement("tr");let mark="일반";if(p.type==="ICON")mark=p.emoji||"⭐";else if(p.type==="TAEGUEK")mark=p.emoji||"🔹";else if(p.type==="AMIGO")mark=p.emoji||"🩶";else if(p.type==="FUTURE")mark=p.emoji||"💗";tr.innerHTML=`<td>${p.name||""}</td><td>${p.pos||""}</td><td>${p.ovr??""}</td><td>${mark}</td>`;tb.appendChild(tr)})}
+  function refreshSubs(){
+  const team = curT();
+  const subs = (team.roster||[]).filter(p=>p.first!=="FIRST").slice(0,10);
+  const tb = qs("#subsTable tbody");
+  tb.innerHTML = "";
+
+  if (subs.length===0){
+    const tr=document.createElement('tr');
+    const td=document.createElement('td');
+    td.colSpan=5; td.textContent='SUB 명단이 비어 있습니다.'; td.style.color='#8aa0b6';
+    tr.appendChild(td); tb.appendChild(tr); return;
+  }
+
+  subs.forEach((p,idx)=>{
+    const tr = document.createElement("tr");
+    const mark = TYPE_EMOJI[p.type] || "일반";
+    tr.innerHTML = `
+      <td>${p.name||""}</td>
+      <td>${p.pos||""}</td>
+      <td>${p.ovr??""}</td>
+      <td>${mark}</td>
+      <td style="text-align:right">
+        <button class="ghost btnUp"   ${idx===0?'disabled':''}>▲</button>
+        <button class="ghost btnDown" ${idx===subs.length-1?'disabled':''}>▼</button>
+      </td>
+    `;
+    const up = tr.querySelector(".btnUp");
+    const dn = tr.querySelector(".btnDown");
+    up && up.addEventListener("click", ()=>{
+      const rosterIdx = idxInRoster(team, p);
+      if (moveSubByOne(team, rosterIdx, -1)){
+        saveAll(); refreshSubs(); refreshRoster(); draw();
+      }
+    });
+    dn && dn.addEventListener("click", ()=>{
+      const rosterIdx = idxInRoster(team, p);
+      if (moveSubByOne(team, rosterIdx, +1)){
+        saveAll(); refreshSubs(); refreshRoster(); draw();
+      }
+    });
+    tb.appendChild(tr);
+  });
+}
+
 
   // top selectors
   function refreshSelectors(){const ps=qs("#playerSelect");ps.value=state.currentPlayer;const ts=qs("#teamSelect");ts.innerHTML="";const po=curP();for(const k of Object.keys(po.teams)){const opt=document.createElement("option");opt.value=k;opt.textContent=k;ts.appendChild(opt)}ts.value=po.currentTeam}
@@ -172,7 +251,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // add / bulk
   on(qs("#addPlayerBtn"),"click",()=>{curT().roster.push({name:"",pos:"DF",first:"SUB",ovr:70,type:"NORMAL",emoji:""});refreshRoster();saveAll();draw()});
-  on(qs("#bulkAddBtn"),"click",()=>{const hint="한 줄에 한 명씩: 이름, 포지션(GK/DF/MF/FW), 구분(FIRST/SUB), 타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE), (선택)이모지, (선택)OVR";const txt=prompt(hint,"");if(!txt)return;const t=curT();txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).forEach(line=>{const parts=line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());const [name,pos,first,type,emoji,ovr]=parts;const T=(type||"NORMAL").toUpperCase();let em=emoji||"";if(!em){if(T==="ICON")em="⭐";else if(T==="TAEGUEK")em="🔹";else if(T==="AMIGO")em="🩶";else if(T==="FUTURE")em="💗"}t.roster.push({name:name||"",pos:(pos||"DF").toUpperCase(),first:((first||"SUB").toUpperCase()==="FIRST"?"FIRST":"SUB"),type:T,emoji:em,ovr:Math.max(1,Math.min(99,Number(ovr)||70))})});refreshRoster();saveAll();draw()});
+  on(qs("#bulkAddBtn"),"click",()=>{
+  const hint = "한 줄에 한 명씩: 이름, OVR, 포지션(GK/DF/MF/FW), 선수타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE)\n예) Van der Sar, 75, GK, NORMAL";
+  const txt = prompt(hint, "");
+  if(!txt) return;
+  const t = curT();
+  txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).forEach(line=>{
+    const parts = line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());
+    const [name, ovrStr, pos, type] = parts;
+    const T = (type||"NORMAL").toUpperCase();
+    t.roster.push({
+      name: name||"",
+      ovr: Math.max(1, Math.min(99, Number(ovrStr)||70)),
+      pos: (pos||"DF").toUpperCase(),
+      first: "SUB",                     // 대량 추가는 기본 SUB로
+      type: T,
+      emoji: TYPE_EMOJI[T] || ""
+    });
+  });
+  refreshRoster(); saveAll(); draw();
+});
 
   // export/import
   on(qs("#exportJsonBtn"),"click",()=>{const text=JSON.stringify(state,null,2);const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(text);a.download='team-state.json';a.click()});
