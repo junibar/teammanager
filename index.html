@@ -1,1 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Team Manager · v8.6</title>
+<style>
+:root{--bg:#0b111a;--panel:#121a24;--muted:#8aa0b6;--text:#e9eef6;--accent:#4da3ff;--pitch:#146c43;--line:#e6f3e9}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",Arial,"Apple Color Emoji","Segoe UI Emoji"}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid #1b2531;background:#0e1522;position:sticky;top:0;z-index:3}
+header h1{font-size:16px;margin:0 6px 0 0;font-weight:700;letter-spacing:.2px}
+.pill{padding:8px 10px;background:var(--panel);border:1px solid #1e2a37;border-radius:10px;display:flex;align-items:center;gap:8px}
+select,input{background:#0f1622;color:var(--text);border:1px solid #293748;border-radius:8px;padding:7px 9px;outline:none}
+select:focus,input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,163,255,.14)}
+button{background:#162336;color:#e6f0ff;border:1px solid #2a3a54;border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{filter:brightness(1.08)}button.ghost{background:transparent;border-color:#3a4a61;color:#cfd9ee}
+button.warn{background:#3f2c00;border-color:#5d4300;color:#ffd98b}button.good{background:#063d2a;border-color:#0f6;color:#c1ffdf}
+main{display:grid;grid-template-columns:1.05fr 880px;gap:14px;padding:14px}@media (max-width:1260px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid #1c2633;border-radius:14px;overflow:hidden}
+.card header{background:transparent;border-bottom:1px solid #1c2633;padding:10px 12px}.card header h2{font-size:14px;margin:0;opacity:.92}
+.card .body{padding:12px}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.muted{color:var(--muted)}.sep{height:1px;background:#1c2633;margin:10px 0}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{border-bottom:1px dashed #263346;padding:6px 6px;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+th{font-weight:600;color:#cdd7e6}tr:hover td{background:#0f1722}td input,td select{width:100%}
+#pitchWrap{position:relative;aspect-ratio:105/68;background:var(--pitch);border:1px solid #0f422b;border-radius:14px;overflow:hidden}
+canvas{display:block;width:100%;height:100%}.drag{cursor:grab;user-select:none;color:#aab6c8}.drag:active{cursor:grabbing}
+.w-num{width:42px;text-align:center}.w-ovr{width:80px}.w-name{width:210px}.w-pos{width:120px}.w-first{width:110px}.w-type{width:220px}.w-del{width:40px;text-align:center}
+.typeWrap{display:flex;gap:8px;align-items:center}.emojiShow{min-width:20px;display:inline-block;text-align:center;opacity:.85}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:50}
+.modal .panel{background:#0e1522;border:1px solid #263448;border-radius:14px;width:560px;max-width:92vw;padding:16px}
+.grid{display:grid;grid-template-columns:130px 1fr;gap:10px 12px;align-items:center}
 
+#subsTable .subs-actions{text-align:right;white-space:nowrap;overflow:visible}
+#subsTable .subsBtn{width:28px;height:28px;line-height:28px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:14px;margin-left:4px}
+button[disabled]{opacity:.45;pointer-events:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>Team Manager · v8.6</h1>
+  <div class="pill"><span class="muted">플레이어</span>
+    <select id="playerSelect"><option>JUNIBAR</option><option>D0PAM1NE</option></select>
+  </div>
+  <div class="pill"><span class="muted">팀</span>
+    <select id="teamSelect"></select>
+    <button id="addTeamBtn">팀 추가</button>
+    <button id="renameTeamBtn" class="ghost">이름 변경</button>
+    <button id="deleteTeamBtn" class="warn">삭제</button>
+  </div>
+  <div class="pill">
+    <button id="exportPngBtn">PNG 내보내기</button>
+    <button id="exportJsonBtn" class="ghost">JSON 내보내기</button>
+    <label class="pill small" for="importJsonInput" style="cursor:pointer">JSON 불러오기</label>
+    <input id="importJsonInput" type="file" accept="application/json" style="display:none"/>
+  </div>
+  <div class="pill">
+    <button id="openSettingsBtn" class="ghost">GitHub 저장 설정</button>
+    <button id="saveToGithubBtn" class="good" title="(Ctrl+S)">GitHub로 저장</button>
+  </div>
+</header>
+
+<main>
+  <section id="left" class="card"><header><h2>로스터</h2></header><div class="body">
+    <div class="row small"><span class="muted">구분 <b>FIRST/SUB</b>. 타입: 일반/아이콘/태극/아미고/퓨쳐 · 이모지 고정(⭐/🔹/➕/💗)</span></div>
+    <div class="sep"></div>
+    <table id="rosterTable"><thead><tr>
+      <th class="w-del">⇅</th><th class="w-num">번호</th><th class="w-name">이름</th><th class="w-ovr">OVR</th>
+      <th class="w-pos">포지션</th><th class="w-first">구분</th><th class="w-type">선수 타입</th><th class="w-del">-</th>
+    </tr></thead><tbody></tbody></table>
+    <div class="sep"></div>
+    <div class="row"><button id="addPlayerBtn">선수 추가</button><button id="bulkAddBtn" class="ghost">대량 추가</button></div>
+  </div></section>
+
+  <section id="center" class="card"><header><h2>전술 보드</h2></header><div class="body">
+    <div id="pitchWrap"><canvas id="pitch"></canvas></div>
+    <div class="sep"></div>
+    <div id="subsPanel">
+      <div id="subsToolbar" style="display:flex;gap:8px;align-items:center;justify-content:flex-start;margin:0 0 8px 0;">
+        <button id="saveBtn" class="good" title="(Ctrl+S)">저장</button>
+        <button id="clearManualBtn" class="ghost">수동 위치 초기화</button>
+        <button id="forceReflowBtn" class="ghost">강제 재배치</button>
+      </div>
+      <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">SUB 명단 (최대 10명)</h3>
+      <table id="subsTable"><thead><tr>
+        <th style="width:38%">이름</th><th style="width:18%">포지션</th><th style="width:18%">OVR</th><th style="width:18%">선수타입</th><th style="width:90px"></th>
+      </tr></thead><tbody></tbody></table>
+    </div>
+  </div></section>
+</main>
+
+<!-- GitHub Settings Modal -->
+<div id="settingsModal" class="modal" aria-hidden="true"><div class="panel">
+  <h3 style="margin:2px 0 12px 0">GitHub 저장 설정</h3>
+  <div class="grid">
+    <div class="muted">Owner</div><input id="ghOwner" placeholder="github-username"/>
+    <div class="muted">Repo</div><input id="ghRepo" placeholder="team-manager"/>
+    <div class="muted">Branch</div><input id="ghBranch" placeholder="main" value="main"/>
+    <div class="muted">Path</div><input id="ghPath" placeholder="data/default.json" value="data/default.json"/>
+    <div class="muted">Token (PAT)</div><input id="ghToken" placeholder="ghp_..." type="password"/>
+  </div>
+  <div class="row" style="margin-top:12px;justify-content:flex-end">
+    <button id="closeSettingsBtn" class="ghost">닫기</button><button id="saveSettingsBtn" class="good">저장</button>
+  </div>
+  <p class="muted" style="margin-top:8px">토큰은 이 브라우저의 <code>localStorage</code>에만 저장됩니다.</p>
+</div></div>
+
+<!-- Bulk Add Modal -->
+<div id="bulkModal" class="modal" aria-hidden="true">
+  <div class="panel">
+    <h3 style="margin:2px 0 12px 0">선수 대량 추가</h3>
+    <p class="muted" style="margin:0 0 8px 0">
+      여러 선수는 <b>줄바꿈</b> 또는 <b>세미콜론(;)</b>으로 구분합니다.<br/>
+      형식: <code>이름, OVR, 포지션(GK/DF/MF/FW), 선수타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE)</code>
+    </p>
+    <textarea id="bulkTextarea" rows="8" style="width:100%;resize:vertical;background:#0f1622;color:#e9eef6;border:1px solid #293748;border-radius:8px;padding:10px"></textarea>
+    <div class="row" style="margin-top:12px;justify-content:flex-end">
+      <button id="bulkCancelBtn" class="ghost">취소(Esc)</button>
+      <button id="bulkConfirmBtn" class="good">추가(Ctrl/⌘+Enter)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // helpers
+  const qs = s => document.querySelector(s);
+  const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
+  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+  const group=(pos)=>{pos=(pos||"").toUpperCase();if(pos==="GK")return"GK";if(pos==="DF")return"DF";if(pos==="MF")return"MF";if(pos==="FW")return"FW";return"DF"};
+  const spaced=(n,w)=>{w=clamp(w,0,82);const xs=[];const c=50,h=w/2;for(let i=0;i<n;i++){const t=(n===1)?0.5:i/(n-1);xs.push(Math.round((c-h)+w*t))}return xs};
+  const safeParse=(j,f)=>{try{const v=JSON.parse(j);return v??f}catch{return f}};
+  const toast=(m)=>{const d=document.createElement('div');d.textContent=m;Object.assign(d.style,{position:'fixed',right:'14px',bottom:'14px',background:'#0f1b2b',border:'1px solid #203149',color:'#cfe3ff',padding:'8px 12px',borderRadius:'10px',zIndex:99});document.body.appendChild(d);setTimeout(()=>d.remove(),1500)};
+
+  // fixed emoji mapping (TAEGUEK 주의)
+  const TYPE_EMOJI = { NORMAL:"", ICON:"⭐", TAEGUEK:"🔹", AMIGO:"➕", FUTURE:"💗" };
+
+  // state
+  const LS_KEY="tm_v8_6";
+  const defaultTeam={roster:[
+    {name:"GK",pos:"GK",first:"FIRST",ovr:75,type:"NORMAL",emoji:""},
+    {name:"RB",pos:"DF",first:"FIRST",ovr:72,type:"NORMAL",emoji:""},
+    {name:"RCB",pos:"DF",first:"FIRST",ovr:73,type:"AMIGO",emoji:"➕"},
+    {name:"LCB",pos:"DF",first:"FIRST",ovr:74,type:"ICON",emoji:"⭐"},
+    {name:"LB",pos:"DF",first:"FIRST",ovr:72,type:"NORMAL",emoji:""},
+    {name:"RM",pos:"MF",first:"FIRST",ovr:77,type:"NORMAL",emoji:""},
+    {name:"CM",pos:"MF",first:"FIRST",ovr:78,type:"TAEGUEK",emoji:"🔹"},
+    {name:"LM",pos:"MF",first:"FIRST",ovr:76,type:"NORMAL",emoji:""},
+    {name:"RW",pos:"FW",first:"FIRST",ovr:78,type:"NORMAL",emoji:""},
+    {name:"LW",pos:"FW",first:"FIRST",ovr:79,type:"NORMAL",emoji:""},
+    {name:"ST",pos:"FW",first:"FIRST",ovr:80,type:"FUTURE",emoji:"💗"}
+  ]};
+  let state = safeParse(localStorage.getItem(LS_KEY), {
+    players: {
+      JUNIBAR: { currentTeam:"TEAM A", teams:{ "TEAM A": JSON.parse(JSON.stringify(defaultTeam)) } },
+      D0PAM1NE:{ currentTeam:"TEAM B", teams:{ "TEAM B": JSON.parse(JSON.stringify(defaultTeam)) } }
+    },
+    currentPlayer: "JUNIBAR"
+  });
+  const saveAll=()=>localStorage.setItem(LS_KEY, JSON.stringify(state));
+  const curP = ()=>state.players[state.currentPlayer];
+  const curT = ()=>curP().teams[curP().currentTeam];
+
+  // canvas / pitch
+  const pitch=qs("#pitch"); const ctx=pitch.getContext("2d");
+  function fitCanvas(){const r=pitch.getBoundingClientRect();const dpr=Math.max(1,window.devicePixelRatio||1);pitch.width=Math.max(10,Math.floor(r.width*dpr));pitch.height=Math.max(10,Math.floor(r.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0)}
+  function drawPitch(){const r=pitch.getBoundingClientRect();const w=Math.max(10,r.width),h=Math.max(10,r.height);ctx.clearRect(0,0,w,h);ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--pitch');ctx.fillRect(0,0,w,h);const line=getComputedStyle(document.documentElement).getPropertyValue('--line');ctx.strokeStyle=line;ctx.lineWidth=2;ctx.strokeRect(6,6,w-12,h-12);ctx.beginPath();ctx.moveTo(6,h/2);ctx.lineTo(w-6,h/2);ctx.stroke();ctx.beginPath();ctx.arc(w/2,h/2,Math.min(w,h)*0.09,0,Math.PI*2);ctx.stroke();const boxW=w*0.36,boxH=h*0.18;ctx.strokeRect(w/2-boxW/2,h-6-boxH,boxW,boxH);ctx.strokeRect(w/2-boxW/2,6,boxW,boxH);const sBoxW=w*0.18,sBoxH=h*0.08;ctx.strokeRect(w/2-sBoxW/2,h-6-sBoxH,sBoxW,sBoxH);ctx.strokeRect(w/2-sBoxW/2,6,sBoxW,sBoxH);ctx.beginPath();ctx.arc(w/2,h/2,3,0,Math.PI*2);ctx.fillStyle=line;ctx.fill()}
+  const xyToCanvas=(x,y)=>{const r=pitch.getBoundingClientRect();const w=Math.max(10,r.width),h=Math.max(10,r.height);return {x:x/100*(w-24)+12,y:h-(y/100*(h-24)+12)}}
+  const canvasToXY=(cx,cy)=>{const r=pitch.getBoundingClientRect();const w=Math.max(10,r.width),h=Math.max(10,r.height);return {x:clamp(((cx-12)/(w-24))*100,0,100),y:clamp(((h-cy-12)/(h-24))*100,0,100)}}
+  function select11(t){const r=Array.isArray(t.roster)?t.roster:[];const f=r.filter(p=>p.first==="FIRST");const s=r.filter(p=>p.first!=="FIRST");let pick=f.slice(0,11);for(const x of s){if(pick.length>=11)break;pick.push(x)}const isGK=pl=>String(pl.pos||pl.name||"").toUpperCase()==="GK";if(!pick.some(isGK)){const gk=r.find(isGK);if(gk){if(pick.length<11)pick.push(gk);else pick[pick.length-1]=gk}}return pick.slice(0,11)}
+  function buildSlots(players){const Y={GK:8,DF:22,MF:52,FW:84}, slots=[{role:"GK",x:50,y:Y.GK}], cnt={DF:0,MF:0,FW:0};players.forEach(p=>{const g=group(p.pos);cnt[g]=(cnt[g]||0)+((g==="GK")?0:1)});spaced(Math.max(1,cnt.DF||4),68).forEach(x=>slots.push({role:"DF",x,y:Y.DF}));spaced(Math.max(1,cnt.MF||4),68).forEach(x=>slots.push({role:"MF",x,y:Y.MF}));spaced(Math.max(1,cnt.FW||2),44).forEach(x=>slots.push({role:"FW",x,y:Y.FW}));return slots}
+  function tokens(){const t=curT();const picked=select11(t);const slots=buildSlots(picked);const used=new Set();const out=[];const take=(g)=>{for(let i=0;i<slots.length;i++){const s=slots[i];if(used.has(i))continue;if(s.role===g){used.add(i);return s}}return null};const any=()=>{for(let i=0;i<slots.length;i++){if(!used.has(i)){used.add(i);return slots[i]}}return{x:50,y:52,role:"MF"}};for(const p of picked){const g=group(p.pos);let spot=take(g)||any();const x=(p.manualX!=null&&p.manualY!=null)?p.manualX:spot.x;const y=(p.manualX!=null&&p.manualY!=null)?p.manualY:spot.y;out.push({p,x,y})}return out}
+  function drawPlayers(){
+    for(const tk of tokens()){
+      const {x,y}=xyToCanvas(tk.x,tk.y);
+      const g=group(tk.p.pos);
+      const color=(g==="GK")?"#21d07a":(g==="DF")?"#4da3ff":(g==="MF")?"#ffd24d":"#ff6f6f";
+      ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.fillStyle="rgba(0,0,0,.25)";ctx.fill();
+      ctx.beginPath();ctx.arc(x,y-1,18,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
+      ctx.lineWidth=2;ctx.strokeStyle="rgba(255,255,255,.75)";ctx.stroke();
+      const badge = TYPE_EMOJI[tk.p.type] || "";
+      if(badge){ctx.font="18px 'Apple Color Emoji','Segoe UI Emoji',system-ui";ctx.textAlign="center";ctx.textBaseline="bottom";ctx.fillText(badge,x,y-22)}
+      const nm=(tk.p.name||"").trim();
+      ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.fillStyle="rgba(255,255,255,.95)";ctx.strokeStyle="rgba(0,0,0,.35)";ctx.lineWidth=3;
+      ctx.strokeText(nm,x,y-1);ctx.fillText(nm,x,y-1);
+      // OVR (색 구간: 90+ 금, 87-89 민트블루, 84-86 보라, 80-83 민트그린, 79- 회색)
+      const ovr=Number(tk.p.ovr||0);
+      const ovrColor=(v)=> v>=90 ? "#F5C542" : v>=87 ? "#4DD0E1" : v>=84 ? "#B78CFF" : v>=80 ? "#6EE7B7" : "#9AA4B2";
+      ctx.font="12px system-ui, -apple-system, 'Segoe UI', Roboto";
+      ctx.textAlign="center";ctx.textBaseline="top";
+      ctx.fillStyle=ovrColor(ovr);ctx.strokeStyle="rgba(0,0,0,.45)";ctx.lineWidth=3;
+      ctx.strokeText(String(ovr),x,y+22);ctx.fillText(String(ovr),x,y+22);
+    }
+  }
+  function draw(){drawPitch();drawPlayers();refreshSubs()}
+  let drag=-1;const hit=(mx,my)=>{const ts=tokens();for(let i=ts.length-1;i>=0;i--){const {x,y}=xyToCanvas(ts[i].x,ts[i].y);const dx=mx-x,dy=my-y;if(dx*dx+dy*dy<=24*24)return i}return-1}
+  const tokRef=(idx)=>{const ts=tokens();if(idx<0||idx>=ts.length)return null;const tk=ts[idx];const p=curT().roster.find(pp=>pp===tk.p);return{tk,p}}
+  pitch.addEventListener("mousedown",(e)=>{const r=pitch.getBoundingClientRect();const mx=(e.clientX-r.left),my=(e.clientY-r.top);drag=hit(mx,my);if(drag>=0)e.preventDefault()});
+  window.addEventListener("mousemove",(e)=>{if(drag<0)return;const r=pitch.getBoundingClientRect();const mx=(e.clientX-r.left),my=(e.clientY-r.top);const {x,y}=canvasToXY(mx,my);const ref=tokRef(drag);if(ref&&ref.p){ref.p.manualX=x;ref.p.manualY=y;saveAll();draw()}});
+  window.addEventListener("mouseup",()=>{drag=-1});
+
+  // roster table
+  const tbody=qs("#rosterTable tbody");
+  function refreshRoster(){
+    const t=curT();tbody.innerHTML="";
+    (t.roster||[]).forEach((p,idx)=>{
+      const tr=document.createElement("tr");tr.draggable=true;
+      tr.innerHTML=`
+        <td class="drag w-del">≡</td>
+        <td class="w-num">${idx+1}</td>
+        <td class="w-name"><input type="text" value="${p.name??""}"></td>
+        <td class="w-ovr"><input type="number" min="1" max="99" value="${p.ovr??70}"></td>
+        <td class="w-pos"><select><option>GK</option><option>DF</option><option>MF</option><option>FW</option></select></td>
+        <td class="w-first"><select><option>FIRST</option><option>SUB</option></select></td>
+        <td class="w-type">
+          <div class="typeWrap">
+            <select class="ptype">
+              <option value="NORMAL">일반</option>
+              <option value="ICON">아이콘</option>
+              <option value="TAEGUEK">태극</option>
+              <option value="AMIGO">아미고</option>
+              <option value="FUTURE">퓨쳐</option>
+            </select>
+            <span class="emojiShow"></span>
+          </div>
+        </td>
+        <td class="w-del"><button class="ghost">-</button></td>`;
+
+      const nameEl=tr.children[2].firstElementChild,
+            ovrEl=tr.children[3].firstElementChild,
+            posSel=tr.children[4].firstElementChild,
+            firstSel=tr.children[5].firstElementChild,
+            typeSel=tr.querySelector(".ptype"),
+            emojiShow=tr.querySelector(".emojiShow"),
+            delBtn=tr.children[7].firstElementChild;
+
+      posSel.value=p.pos||"DF"; firstSel.value=p.first||"SUB"; typeSel.value=p.type||"NORMAL";
+      p.emoji = TYPE_EMOJI[p.type||"NORMAL"] || ""; emojiShow.textContent = p.emoji;
+
+      nameEl.addEventListener("input",()=>{p.name=nameEl.value;saveAll();draw()});
+      ovrEl.addEventListener("change",()=>{p.ovr=Math.max(1,Math.min(99,Number(ovrEl.value)||70));saveAll();draw()});
+      posSel.addEventListener("change",()=>{p.pos=posSel.value;saveAll();draw()});
+      firstSel.addEventListener("change",()=>{p.first=firstSel.value;saveAll();draw()});
+      typeSel.addEventListener("change",()=>{p.type=typeSel.value;p.emoji=TYPE_EMOJI[p.type]||"";emojiShow.textContent=p.emoji;saveAll();draw()});
+
+      delBtn.addEventListener("click",()=>{t.roster.splice(idx,1);refreshRoster();saveAll();draw()});
+
+      tr.addEventListener("dragstart",(e)=>{e.dataTransfer.setData("text/plain",String(idx));tr.style.opacity=.5});
+      tr.addEventListener("dragend",()=>{tr.style.opacity=""});
+      tr.addEventListener("dragover",(e)=>{e.preventDefault();tr.style.outline="1px dashed #3a4a66"});
+      tr.addEventListener("dragleave",()=>{tr.style.outline=""});
+      tr.addEventListener("drop",(e)=>{e.preventDefault();tr.style.outline="";const from=Number(e.dataTransfer.getData("text/plain"));const to=idx;if(Number.isInteger(from)&&from!==to){const arr=t.roster;const moved=arr.splice(from,1)[0];arr.splice(to,0,moved);refreshRoster();saveAll();draw()}});
+      tbody.appendChild(tr);
+    });
+  }
+
+  // SUB 재정렬 유틸
+  function moveSubByOne(team, subRosterIndex, dir){
+    const r=team.roster;
+    const subIdxs=r.map((p,i)=>({p,i})).filter(x=>x.p.first!=="FIRST").map(x=>x.i);
+    const pos=subIdxs.indexOf(subRosterIndex);
+    if(pos===-1)return false;
+    const target=pos+dir;
+    if(target<0||target>=subIdxs.length)return false;
+    const a=subIdxs[pos], b=subIdxs[target];
+    const tmp=r[a]; r[a]=r[b]; r[b]=tmp;
+    return true;
+  }
+  function idxInRoster(team, playerObj){return team.roster.findIndex(x=>x===playerObj)}
+
+  // SUB 패널
+  function refreshSubs(){
+    const team=curT();
+    const subs=(team.roster||[]).filter(p=>p.first!=="FIRST").slice(0,10);
+    const tb=qs("#subsTable tbody"); tb.innerHTML="";
+    if(subs.length===0){
+      const tr=document.createElement('tr'); const td=document.createElement('td');
+      td.colSpan=5; td.textContent='SUB 명단이 비어 있습니다.'; td.style.color='#8aa0b6';
+      tr.appendChild(td); tb.appendChild(tr); return;
+    }
+    subs.forEach((p,idx)=>{
+      const tr=document.createElement("tr");
+      const mark = TYPE_EMOJI[p.type] || "일반";
+      tr.innerHTML=`
+        <td>${p.name||""}</td>
+        <td>${p.pos||""}</td>
+        <td>${p.ovr??""}</td>
+        <td>${mark}</td>
+        <td class="subs-actions">
+          <button class="ghost subsBtn btnUp"   ${idx===0?'disabled':''}>&#9650;</button>
+          <button class="ghost subsBtn btnDown" ${idx===subs.length-1?'disabled':''}>&#9660;</button>
+        </td>`;
+      const up=tr.querySelector(".btnUp"), dn=tr.querySelector(".btnDown");
+      up&&up.addEventListener("click",()=>{const i=idxInRoster(team,p); if(moveSubByOne(team,i,-1)){saveAll();refreshSubs();refreshRoster();draw();}});
+      dn&&dn.addEventListener("click",()=>{const i=idxInRoster(team,p); if(moveSubByOne(team,i,+1)){saveAll();refreshSubs();refreshRoster();draw();}});
+      tb.appendChild(tr);
+    });
+  }
+
+  // 상단 셀렉터
+  function refreshSelectors(){
+    const ps=qs("#playerSelect"); ps.value=state.currentPlayer;
+    const ts=qs("#teamSelect"); ts.innerHTML="";
+    const po=curP(); for(const k of Object.keys(po.teams)){const opt=document.createElement("option");opt.value=k;opt.textContent=k;ts.appendChild(opt)}
+    ts.value=po.currentTeam;
+  }
+  on(qs("#playerSelect"),"change",()=>{state.currentPlayer=qs("#playerSelect").value;saveAll();refreshSelectors();refreshRoster();fitCanvas();draw()});
+  on(qs("#teamSelect"),"change",()=>{curP().currentTeam=qs("#teamSelect").value;saveAll();refreshRoster();fitCanvas();draw()});
+  on(qs("#addTeamBtn"),"click",()=>{const name=prompt("새 팀 이름");if(!name)return;const po=curP();if(po.teams[name])return alert("이미 존재합니다.");po.teams[name]=JSON.parse(JSON.stringify(defaultTeam));po.currentTeam=name;saveAll();refreshSelectors();refreshRoster();fitCanvas();draw()});
+  on(qs("#renameTeamBtn"),"click",()=>{const po=curP();const old=po.currentTeam;const nn=prompt(`팀 이름 변경: '${old}' →`,old);if(!nn||nn===old)return;if(po.teams[nn])return alert("같은 이름이 이미 있습니다.");po.teams[nn]=po.teams[old];delete po.teams[old];po.currentTeam=nn;saveAll();refreshSelectors();refreshRoster();fitCanvas();draw()});
+  on(qs("#deleteTeamBtn"),"click",()=>{const po=curP();const name=po.currentTeam;if(!confirm(`팀 '${name}' 삭제할까요?`))return;delete po.teams[name];po.currentTeam=Object.keys(po.teams)[0]||null;saveAll();refreshSelectors();refreshRoster();fitCanvas();draw()});
+
+  // 추가 / 대량 추가(모달)
+  on(qs("#addPlayerBtn"),"click",()=>{curT().roster.push({name:"",pos:"DF",first:"SUB",ovr:70,type:"NORMAL",emoji:""});refreshRoster();saveAll();draw()});
+  const bulkModal=qs("#bulkModal"), bulkTA=qs("#bulkTextarea");
+  const bulkOpen=()=>{bulkTA.value=""; bulkModal.style.display="flex"; setTimeout(()=>bulkTA.focus(),0)};
+  const bulkClose=()=>{bulkModal.style.display="none"};
+  function bulkParseAndInsert(text){
+    if(!text) return; const t=curT();
+    const rows=text.split(/[\r\n;]+/).map(s=>s.trim()).filter(Boolean);
+    rows.forEach(line=>{
+      const parts=line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());
+      const [name,ovrStr,pos,type]=parts; const T=(type||"NORMAL").toUpperCase();
+      t.roster.push({name:name||"",ovr:Math.max(1,Math.min(99,Number(ovrStr)||70)),pos:(pos||"DF").toUpperCase(),first:"SUB",type:T,emoji:TYPE_EMOJI[T]||""});
+    });
+    refreshRoster(); saveAll(); draw();
+  }
+  on(qs("#bulkAddBtn"),"click",()=>bulkOpen());
+  on(qs("#bulkConfirmBtn"),"click",()=>{bulkParseAndInsert(bulkTA.value);bulkClose()});
+  on(qs("#bulkCancelBtn"),"click",()=>bulkClose());
+  window.addEventListener("keydown",(e)=>{if(bulkModal.style.display==="flex"){if(e.key==="Escape"){e.preventDefault();bulkClose()} if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();qs("#bulkConfirmBtn").click()}}});
+
+  // export/import
+  on(qs("#exportJsonBtn"),"click",()=>{const text=JSON.stringify(state,null,2);const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(text);a.download='team-state.json';a.click()});
+  on(qs("#exportPngBtn"),"click",()=>{fitCanvas();draw();const a=document.createElement('a');a.href=pitch.toDataURL('image/png');a.download='formation.png';a.click()});
+  on(qs("#importJsonInput"),"change",async(e)=>{const f=e.target.files[0];if(!f)return;const text=await f.text();const js=safeParse(text,null);if(!js||!js.players){alert('유효하지 않은 JSON');return}state=js;saveAll();refreshSelectors();refreshRoster();fitCanvas();draw();toast('JSON 불러오기 완료')});
+
+  // GitHub save (선택)
+  const GH_KEY="tm_v8_github";
+  const getCfg=()=>safeParse(localStorage.getItem(GH_KEY),{owner:"",repo:"",branch:"main",path:"data/default.json",token:""});
+  const setCfg=(c)=>localStorage.setItem(GH_KEY,JSON.stringify(c));
+  const b64=(s)=>btoa(unescape(encodeURIComponent(s)));
+  async function githubGetMeta(o,r,p,b,t){const url=`https://api.github.com/repos/${o}/${r}/contents/${encodeURIComponent(p)}?ref=${encodeURIComponent(b)}`;const h={"Accept":"application/vnd.github+json"};if(t)h.Authorization=`Bearer ${t}`;const resp=await fetch(url,{headers:h});if(resp.status===404)return{exists:false,sha:null};if(!resp.ok)throw new Error(`GET ${resp.status}`);const js=await resp.json();return{exists:true,sha:js.sha||null}}
+  async function githubPutFile(o,r,p,b,t,contentText,message){const url=`https://api.github.com/repos/${o}/${r}/contents/${encodeURIComponent(p)}`;const h={"Accept":"application/vnd.github+json","Content-Type":"application/json"};if(t)h.Authorization=`Bearer ${t}`;const m1=await githubGetMeta(o,r,p,b,t);const body={message,content:b64(contentText),branch:b};if(m1.exists&&m1.sha)body.sha=m1.sha;let resp=await fetch(url,{method:"PUT",headers:h,body:JSON.stringify(body)});if(resp.status===409){const m2=await githubGetMeta(o,r,p,b,t);if(m2.sha){body.sha=m2.sha;resp=await fetch(url,{method:"PUT",headers:h,body:JSON.stringify(body)})}}if(!resp.ok){const txt=await resp.text();throw new Error(`PUT ${resp.status}: ${txt}`)}return await resp.json()}
+  function openSettings(){const c=getCfg();qs("#ghOwner").value=c.owner||"";qs("#ghRepo").value=c.repo||"";qs("#ghBranch").value=c.branch||"main";qs("#ghPath").value=c.path||"data/default.json";qs("#ghToken").value=c.token||"";qs("#settingsModal").style.display="flex"}
+  function closeSettings(){qs("#settingsModal").style.display="none"}
+  function saveSettings(){const cfg={owner:qs("#ghOwner").value.trim(),repo:qs("#ghRepo").value.trim(),branch:qs("#ghBranch").value.trim()||"main",path:qs("#ghPath").value.trim()||"data/default.json",token:qs("#ghToken").value.trim()};setCfg(cfg);closeSettings();toast("GitHub 저장 설정 저장됨")}
+  async function saveGithub(){const c=getCfg();if(!c.owner||!c.repo||!c.branch||!c.path||!c.token){openSettings();alert("GitHub 저장 설정을 먼저 입력하세요.");return}const content=JSON.stringify(state,null,2);const msg=`save: ${state.currentPlayer} · ${curP().currentTeam} (${new Date().toISOString()})`;try{await githubPutFile(c.owner,c.repo,c.path,c.branch,c.token,content,msg);toast("GitHub 저장 성공 ✓")}catch(e){alert("GitHub 저장 실패: "+e.message)}}
+  on(qs("#openSettingsBtn"),"click",openSettings);
+  on(qs("#closeSettingsBtn"),"click",closeSettings);
+  on(qs("#saveSettingsBtn"),"click",saveSettings);
+  on(qs("#saveToGithubBtn"),"click",()=>{saveAll();saveGithub()});
+  on(qs("#saveBtn"),"click",()=>{saveAll();saveGithub()});
+  window.addEventListener("keydown",(e)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveAll();saveGithub()}});
+
+  // init
+  function boot(){refreshSelectors();refreshRoster();fitCanvas();draw()}
+  window.addEventListener("resize",()=>{fitCanvas();draw()});
+  boot();
+});
+</script>
+</body>
+</html>
