@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Team Manager · Formation Board v8.4.1</title>
+<title>Team Manager · Formation Board v8.5.1</title>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 <style>
   :root{ --bg:#0b111a; --panel:#121a24; --muted:#8aa0b6; --text:#e9eef6; --accent:#4da3ff; --pitch:#146c43; --line:#e6f3e9; }
   *{box-sizing:border-box} html,body{height:100%}
-  body{margin:0; background:var(--bg); color:var(--text); font:14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, "Apple Color Emoji","Segoe UI Emoji";}
+  body{margin:0; background:var(--bg); color:var(--text); font:14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, "Noto Sans KR", "Apple Color Emoji","Segoe UI Emoji";}
   header{display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:12px 16px; border-bottom:1px solid #1b2531; background:#0e1522; position:sticky; top:0; z-index:3;}
   header h1{font-size:16px; margin:0 6px 0 0; font-weight:700; letter-spacing:.2px}
   .pill{padding:8px 10px; background:var(--panel); border:1px solid #1e2a37; border-radius:10px; display:flex; align-items:center; gap:8px}
@@ -30,13 +30,19 @@
   .drag{cursor:grab; user-select:none; color:#aab6c8} .drag:active{cursor:grabbing}
   .banner{background:#0f1b2b; border:1px solid #203149; color:#b7c8e6; padding:6px 10px; border-radius:10px; display:flex; align-items:center; gap:8px}
   .banner small{opacity:.85}
-  .w-num{width:42px; text-align:center} .w-ovr{width:80px} .w-name{width:210px} .w-pos{width:120px} .w-first{width:110px} .w-type{width:200px} .w-del{width:40px; text-align:center}
+  .w-num{width:42px; text-align:center} .w-ovr{width:80px} .w-name{width:210px} .w-pos{width:120px} .w-first{width:110px} .w-type{width:220px} .w-del{width:40px; text-align:center}
   .typeWrap{display:flex; gap:6px; align-items:center} .emoji{width:52px}
+  /* Modal + toast */
+  .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.45); z-index:50; }
+  .modal .panel{ background:#0e1522; border:1px solid #263448; border-radius:14px; width:560px; max-width:92vw; padding:16px; }
+  .grid{display:grid; grid-template-columns:130px 1fr; gap:10px 12px; align-items:center}
+  .toast{position:fixed; right:14px; bottom:14px; background:#0c402a; color:#d9ffe8; border:1px solid #1f6a46; padding:10px 14px; border-radius:12px; display:none; z-index:60;}
+  .toast.error{background:#4a1b1b; color:#ffe0e0; border-color:#8a2f2f}
 </style>
 </head>
 <body>
 <header>
-  <h1>Team Manager · Formation Board v8.4.1</h1>
+  <h1>Team Manager · Formation Board v8.5.1</h1>
   <div class="pill">
     <span class="muted">플레이어</span>
     <select id="playerSelect"><option>JUNIBAR</option><option>D0PAM1NE</option></select>
@@ -53,6 +59,10 @@
     <button id="exportJsonBtn" class="ghost">JSON 내보내기</button>
     <label class="pill small" for="importJsonInput" style="cursor:pointer">JSON 불러오기</label>
     <input id="importJsonInput" type="file" accept="application/json" style="display:none" />
+  </div>
+  <div class="pill">
+    <button id="openSettingsBtn" class="ghost">GitHub 저장 설정</button>
+    <button id="saveToGithubBtn" class="good">GitHub로 저장</button>
   </div>
   <div id="dataBanner" class="banner" style="margin-left:auto; display:none;">
     <span>📦</span><span id="dataBannerText"></span>
@@ -101,14 +111,38 @@
   </section>
 </main>
 
+<!-- Settings Modal -->
+<div id="settingsModal" class="modal">
+  <div class="panel">
+    <h3 style="margin:2px 0 12px 0">GitHub 저장 설정</h3>
+    <div class="grid">
+      <div class="muted">Owner</div><input id="ghOwner" placeholder="github-username" />
+      <div class="muted">Repo</div><input id="ghRepo" placeholder="team-manager" />
+      <div class="muted">Branch</div><input id="ghBranch" placeholder="main" value="main" />
+      <div class="muted">Path</div><input id="ghPath" placeholder="data/default.json" value="data/default.json" />
+      <div class="muted">Token (PAT)</div><input id="ghToken" placeholder="ghp_..." type="password" />
+    </div>
+    <div class="row" style="margin-top:12px; justify-content:flex-end">
+      <button id="closeSettingsBtn" class="ghost">닫기</button>
+      <button id="saveSettingsBtn" class="good">저장</button>
+    </div>
+    <p class="muted" style="margin-top:8px">토큰은 이 브라우저의 <code>localStorage</code>에만 저장됩니다. 공개 저장소/페이지에 노출하지 마세요.</p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
 <script>
 const TYPE_LABEL = { NORMAL:"일반", ICON:"아이콘", TAEGUEK:"태극", AMIGO:"아미고", FUTURE:"퓨쳐" };
-const LS_KEY = "tm_v8_4_1";
+const LS_KEY = "tm_v8_5_1";
+const GH_KEY = "tm_v8_5_github";
+let dataSource = null;
 function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 function groupByPos(pos){ pos=(pos||"").toUpperCase(); if(pos==="GK") return "GK"; if(pos==="DF") return "DF"; if(pos==="MF") return "MF"; if(pos==="FW") return "FW"; return "DF"; }
 function spacedXs(n, widthPct){ widthPct = clamp(widthPct, 0, 82); const xs=[]; const center=50, half=widthPct/2; for(let i=0;i<n;i++){ const t=(n===1)?0.5:i/(n-1); xs.push(Math.round((center-half)+widthPct*t)); } return xs; }
 function safeParse(json, fallback){ try{ const v=JSON.parse(json); return v??fallback; }catch{ return fallback; } }
 function getQuery(name){ const u=new URL(location.href); return u.searchParams.get(name); }
+function showToast(msg, isErr=false){ const t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(isErr?' error':''); t.style.display='block'; setTimeout(()=>{ t.style.display='none'; }, 2200); }
 
 const defaultTeam = { roster:[
   {name:"GK", pos:"GK", first:"FIRST", ovr:72, type:"NORMAL", emoji:""},
@@ -131,8 +165,6 @@ function buildDefaultState(){
 function loadAll(){ return safeParse(localStorage.getItem(LS_KEY), null); }
 function saveAll(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 
-// Auto-load (?data or /data/default.json)
-let dataSource = null;
 async function tryAutoLoad(){
   const override = getQuery("data");
   const candidates = [ override, "data/default.json" ].filter(Boolean);
@@ -160,7 +192,7 @@ async function initState(){
     if(fetched){ state = fetched; return; }
   }
   if(!ls){
-    const legacy = safeParse(localStorage.getItem("tm_v8_4"), null);
+    const legacy = safeParse(localStorage.getItem("tm_v8_5") || localStorage.getItem("tm_v8_4") || localStorage.getItem("tm_v8_3"), null);
     if(legacy && legacy.players){ localStorage.setItem(LS_KEY, JSON.stringify(legacy)); ls = legacy; }
   }
   if(!ls){ ls = buildDefaultState(); localStorage.setItem(LS_KEY, JSON.stringify(ls)); }
@@ -178,24 +210,60 @@ function ensureDefaults(){
     if(!po.currentTeam || !po.teams[po.currentTeam]) po.currentTeam=Object.keys(po.teams)[0];
   }
 }
-
 function currentPlayerObj(){ return state.players[state.currentPlayer]; }
 function currentTeamObj(){ const p=currentPlayerObj(); return p.teams[p.currentTeam]; }
 
-const playerSelect = document.getElementById("playerSelect");
-const teamSelect = document.getElementById("teamSelect");
+// GitHub Save helpers
+function getGhCfg(){ return safeParse(localStorage.getItem("tm_v8_5_github"), {owner:"", repo:"", branch:"main", path:"data/default.json", token:""}); }
+function setGhCfg(cfg){ localStorage.setItem("tm_v8_5_github", JSON.stringify(cfg)); }
+function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
+async function githubGetSha(owner, repo, path, branch, token){
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+  const resp = await fetch(url, { headers: { "Authorization": token?`Bearer ${token}`:undefined, "Accept":"application/vnd.github+json" } });
+  if(resp.status===404) return null;
+  if(!resp.ok) throw new Error(`GET ${resp.status}`);
+  const js = await resp.json();
+  return js.sha || null;
+}
+async function githubPutFile(owner, repo, path, branch, token, contentText, message){
+  const sha = await githubGetSha(owner, repo, path, branch, token); // may be null
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
+  const body = { message, content: b64(contentText), branch };
+  if(sha) body.sha = sha;
+  const resp = await fetch(url, {
+    method: "PUT",
+    headers: { "Authorization": token?`Bearer ${token}`:undefined, "Accept":"application/vnd.github+json", "Content-Type":"application/json" },
+    body: JSON.stringify(body)
+  });
+  if(!resp.ok){ const t = await resp.text(); throw new Error(`PUT ${resp.status}: ${t}`); }
+  return await resp.json();
+}
+async function saveToGithubNow(){
+  const cfg=getGhCfg();
+  if(!cfg.owner || !cfg.repo || !cfg.branch || !cfg.path || !cfg.token){ showToast("GitHub 저장 설정이 필요합니다.", true); return false; }
+  const contentText = JSON.stringify(state, null, 2);
+  const msg = `feat: save state via Ctrl+S (${new Date().toISOString()})`;
+  const res = await githubPutFile(cfg.owner, cfg.repo, cfg.path, cfg.branch, cfg.token, contentText, msg);
+  showToast("GitHub 저장 성공 ✅");
+  return res;
+}
+
+// UI refs
+const playerSelectEl = document.getElementById("playerSelect");
+const teamSelectEl = document.getElementById("teamSelect");
 const rosterTableBody = document.querySelector("#rosterTable tbody");
 const pitch = document.getElementById("pitch");
 const ctx = pitch.getContext("2d");
 const dataBanner = document.getElementById("dataBanner");
 const dataBannerText = document.getElementById("dataBannerText");
 
+// Counts
 function countStarterType(team, t){ return (team.roster||[]).filter(p=>p.first==="FIRST" && (p.type||"NORMAL")===t).length; }
 function countTypeAll(team, t){ return (team.roster||[]).filter(p=> (p.type||"NORMAL")===t).length; }
 function enforceTypeLimit(team, next){
   if(next==="ICON" && countStarterType(team,"ICON")>=2) return false;
   if(next==="TAEGUEK" && countStarterType(team,"TAEGUEK")>=2) return false;
-  if(next==="FUTURE" && countTypeAll(team,"FUTURE")>=1) return false; // team-wide unique
+  if(next==="FUTURE" && countTypeAll(team,"FUTURE")>=1) return false;
   return true;
 }
 
@@ -268,7 +336,7 @@ function refreshRosterTable(){
     emojiEl.addEventListener("input",()=>{ p.emoji=emojiEl.value; saveAll(); draw(); });
     delBtn.addEventListener("click",()=>{ team.roster.splice(idx,1); refreshRosterTable(); saveAll(); draw(); });
 
-    // Drag reorder (main roster table)
+    // Drag reorder main roster
     tr.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain", String(idx)); tr.style.opacity=.5; });
     tr.addEventListener("dragend",()=>{ tr.style.opacity=""; });
     tr.addEventListener("dragover",(e)=>{ e.preventDefault(); tr.style.outline="1px dashed #3a4a66"; });
@@ -355,6 +423,7 @@ function drawPlayers(){
 }
 function draw(){ drawPitch(); drawPlayers(); refreshSubsPanel(); }
 
+// DnD over canvas
 let dragIndex=-1;
 function hitTest(mx,my){ const tks=tokensForBoard(); for(let i=tks.length-1;i>=0;i--){ const {x,y}=xyToCanvas(tks[i].x,tks[i].y); const dx=mx-x, dy=my-y; if(dx*dx+dy*dy<=24*24) return i; } return -1; }
 function tokenRef(idx){ const tks=tokensForBoard(); if(idx<0||idx>=tks.length) return null; const tk=tks[idx]; const team=currentTeamObj(); const p=team.roster.find(pp=>pp===tk.p); return {tk,p}; }
@@ -362,7 +431,7 @@ pitch.addEventListener("mousedown",(e)=>{ const r=pitch.getBoundingClientRect();
 window.addEventListener("mousemove",(e)=>{ if(dragIndex<0) return; const r=pitch.getBoundingClientRect(); const mx=(e.clientX-r.left), my=(e.clientY-r.top); const {x,y}=canvasToXY(mx,my); const ref=tokenRef(dragIndex); if(ref&&ref.p){ ref.p.manualX=x; ref.p.manualY=y; saveAll(); draw(); } });
 window.addEventListener("mouseup",()=>{ dragIndex=-1; });
 
-// ---- SUB 패널: 드래그 정렬 ----
+// SUB panel (drag reorder within SUB section)
 function refreshSubsPanel(){
   const team=currentTeamObj();
   const subs=(team.roster||[]).filter(p=>p.first!=="FIRST");
@@ -373,7 +442,6 @@ function refreshSubsPanel(){
     let mark="일반"; if(p.type==="ICON") mark=(p.emoji||"⭐"); else if(p.type==="TAEGUEK") mark=(p.emoji||"🔹"); else if(p.type==="AMIGO") mark=(p.emoji||"🩶"); else if(p.type==="FUTURE") mark=(p.emoji||"💗");
     tr.innerHTML = `<td class="drag">≡</td><td>${(p.name||"")}</td><td>${(p.pos||"")}</td><td>${(p.ovr??"")}</td><td>${mark}</td>`;
 
-    // DnD within subs: reorder in the main roster while keeping only SUB section reordered
     tr.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain", String(localIdx)); tr.style.opacity=.5; });
     tr.addEventListener("dragend",()=>{ tr.style.opacity=""; });
     tr.addEventListener("dragover",(e)=>{ e.preventDefault(); tr.style.outline="1px dashed #3a4a66"; });
@@ -382,13 +450,11 @@ function refreshSubsPanel(){
       e.preventDefault(); tr.style.outline="";
       const fromLocal=Number(e.dataTransfer.getData("text/plain")); const toLocal=localIdx;
       if(Number.isInteger(fromLocal) && fromLocal!==toLocal){
-        // compute global roster indices of SUBs
         const roster=currentTeamObj().roster;
         const subsGlobalIdx = roster.map((pp,i)=> pp.first!=="FIRST" ? i : -1).filter(i=>i>=0);
         const fromGlobal = subsGlobalIdx[fromLocal];
         const toGlobal = subsGlobalIdx[toLocal];
         const moved = roster.splice(fromGlobal,1)[0];
-        // recompute subsGlobalIdx after splice effect if needed
         const subsGlobalIdxAfter = roster.map((pp,i)=> pp.first!=="FIRST" ? i : -1).filter(i=>i>=0);
         const insertAt = subsGlobalIdxAfter[toLocal] ?? roster.length;
         roster.splice(insertAt, 0, moved);
@@ -400,7 +466,7 @@ function refreshSubsPanel(){
   });
 }
 
-// ---- Export: JSON & PNG (filename prompt) ----
+// Export: JSON & PNG
 function downloadBlob(blob, filename){
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
@@ -413,7 +479,6 @@ function exportJSON(){
   downloadBlob(blob, defName);
 }
 async function exportPNG(){
-  // Ensure canvas is up to date
   fitCanvas(); draw();
   const defName = prompt("저장할 PNG 파일명(확장자 포함)", "formation.png");
   if(!defName) return;
@@ -423,7 +488,7 @@ async function exportPNG(){
   downloadBlob(blob, defName);
 }
 
-// ---- Team add/delete/rename ----
+// Team ops
 function renameCurrentTeam(){
   const po=currentPlayerObj();
   const oldName = po.currentTeam;
@@ -431,14 +496,17 @@ function renameCurrentTeam(){
   const newName = prompt(`팀 이름 변경: '${oldName}' →`, oldName);
   if(!newName || newName===oldName) return;
   if(po.teams[newName]){ alert("같은 이름의 팀이 이미 있습니다."); return; }
-  // Move data under new key
   po.teams[newName] = po.teams[oldName];
   delete po.teams[oldName];
   po.currentTeam = newName;
   saveAll(); refreshTeamSelect(); refreshRosterTable(); fitCanvas(); draw();
 }
 
-document.getElementById("saveBtn").addEventListener("click",()=>{ saveAll(); const btn=document.getElementById("saveBtn"); const t=btn.textContent; btn.textContent="저장됨 ✓"; setTimeout(()=>btn.textContent=t,900); });
+// Header controls
+document.getElementById("saveBtn").addEventListener("click", async ()=>{
+  saveAll();
+  try { await saveToGithubNow(); } catch(e){ showToast("GitHub 저장 실패", true); }
+});
 document.getElementById("clearManualBtn").addEventListener("click",()=>{ const t=currentTeamObj(); for(const p of t.roster){ delete p.manualX; delete p.manualY; } saveAll(); draw(); });
 document.getElementById("forceReflowBtn").addEventListener("click",()=>{ draw(); });
 
@@ -452,6 +520,7 @@ document.getElementById("reloadDataBtn").addEventListener("click", async ()=>{
   else{ alert("data/default.json 또는 ?data= 로드 실패"); }
 });
 
+// Player/Team selects
 const playerSelectEl = document.getElementById("playerSelect");
 const teamSelectEl = document.getElementById("teamSelect");
 playerSelectEl.addEventListener("change",()=>{ state.currentPlayer = playerSelectEl.value; saveAll(); refreshTeamSelect(); refreshRosterTable(); fitCanvas(); draw(); });
@@ -466,21 +535,22 @@ document.getElementById("deleteTeamBtn").addEventListener("click",()=>{
 });
 teamSelectEl.addEventListener("change",()=>{ const po=currentPlayerObj(); po.currentTeam=teamSelectEl.value; saveAll(); refreshRosterTable(); fitCanvas(); draw(); });
 
+// Roster add/bulk
 document.getElementById("addPlayerBtn").addEventListener("click",()=>{
   const t=currentTeamObj(); t.roster.push({name:"",pos:"DF",first:"SUB",ovr:70,type:"NORMAL",emoji:""});
   refreshRosterTable(); saveAll(); draw();
 });
 document.getElementById("bulkAddBtn").addEventListener("click",()=>{
-  const hint="한 줄에 한 명씩: 이름, OVR, 포지션(GK/DF/MF/FW), 구분(FIRST/SUB), 타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE),\n예)\nHaaland, 91, FW, FIRST";
+  const hint="한 줄에 한 명씩: 이름, 포지션(GK/DF/MF/FW), 구분(FIRST/SUB), 타입(NORMAL/ICON/TAEGUEK/AMIGO/FUTURE), (선택)이모지, (선택)OVR\n예)\nHaaland, FW, FIRST, ICON, ⭐, 90\nSon, FW, FIRST, TAEGUEK, 🔹, 87\nLee Kang-in, MF, FIRST, AMIGO, 🩶, 82\nWonderkid, MF, SUB, FUTURE, 💗, 78";
   const txt=prompt(hint,""); if(!txt) return; const t=currentTeamObj();
   txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).forEach(line=>{
     const parts=line.split(/[\t,]+|\s{2,}/).map(s=>s.trim());
     const [name,pos,first,type,emoji,ovr] = parts;
     const T=(type||"NORMAL").toUpperCase();
-    if(T==="FUTURE" && countTypeAll(currentTeamObj(), "FUTURE") >= 1){ alert("FUTURE(퓨쳐)는 팀당 한 명만 가능합니다. 해당 줄은 건너뜁니다: "+(name||"")); return; }
+    if(T==="FUTURE" && (currentTeamObj().roster||[]).filter(pp=> (pp.type||"NORMAL")==="FUTURE").length>=1){ alert("FUTURE(퓨쳐)는 팀당 한 명만 가능합니다: "+(name||"")); return; }
     let em = emoji||""; if(!em){ if(T==="ICON") em="⭐"; else if(T==="TAEGUEK") em="🔹"; else if(T==="AMIGO") em="🩶"; else if(T==="FUTURE") em="💗"; }
-    t.roster.push({name:name||"", ovr: Math.max(1,Math.min(99, Number(ovr)||70)), pos:(pos||"DF").toUpperCase(), first:((first||"SUB").toUpperCase()==="FIRST"?"FIRST":"SUB"),
-      type:T, emoji:em});
+    t.roster.push({name:name||"", pos:(pos||"DF").toUpperCase(), first:((first||"SUB").toUpperCase()==="FIRST"?"FIRST":"SUB"),
+      type:T, emoji:em, ovr: Math.max(1,Math.min(99, Number(ovr)||70)) });
   });
   refreshRosterTable(); saveAll(); draw();
 });
@@ -494,6 +564,15 @@ function refreshTeamSelect(){
 }
 
 function updateBanner(){ if(dataSource){ dataBanner.style.display='flex'; dataBannerText.textContent=`로컬스토리지 ← ${dataSource} 로드됨`; } else { dataBanner.style.display='none'; } }
+
+// Ctrl+S → Save to GitHub (data/default.json)
+window.addEventListener("keydown", async (e)=>{
+  if((e.ctrlKey || e.metaKey) && (e.key==='s' || e.key==='S')){
+    e.preventDefault();
+    saveAll();
+    try { await saveToGithubNow(); } catch(err){ showToast("GitHub 저장 실패", true); }
+  }
+});
 
 async function boot(){
   await initState();
