@@ -7,11 +7,11 @@
           "roster": [
             {
               "name": "Edwin van der Sar",
+              "ovr": 88,
               "pos": "GK",
               "first": "FIRST",
-              "type": "AMIGO",
-              "emoji": "➕",
-              "ovr": 88
+              "type": "ICON",
+              "emoji": "⭐"
             },
             {
               "name": "Josko Gvardiol",
@@ -33,21 +33,21 @@
             },
             {
               "name": "김민재",
+              "ovr": 90,
               "pos": "DF",
               "first": "FIRST",
               "type": "AMIGO",
-              "emoji": "➕",
-              "ovr": 90
+              "emoji": "➕"
             },
             {
               "name": "김태영",
+              "ovr": 86,
               "pos": "DF",
               "first": "FIRST",
               "type": "TAEGUEK",
               "emoji": "🔹",
-              "ovr": 86,
-              "manualX": 82.72946859903382,
-              "manualY": 28.317324795446456
+              "manualX": 82.61877172653534,
+              "manualY": 31.23187993860497
             },
             {
               "name": "Rodri",
@@ -60,16 +60,6 @@
               "manualY": 42.16767461164473
             },
             {
-              "name": "Tijjani Reijnders",
-              "pos": "MF",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 86,
-              "manualX": 58.81642512077294,
-              "manualY": 57.72560180244278
-            },
-            {
               "name": "Bruno Fernandes",
               "pos": "MF",
               "first": "FIRST",
@@ -80,12 +70,14 @@
               "manualY": 57.72560180244278
             },
             {
-              "name": "Cristiano Ronaldo",
-              "pos": "FW",
+              "name": "Tijjani Reijnders",
+              "pos": "MF",
               "first": "FIRST",
-              "type": "ICON",
-              "emoji": "⭐",
-              "ovr": 94
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 86,
+              "manualX": 58.81642512077294,
+              "manualY": 57.72560180244278
             },
             {
               "name": "Erling Haaland",
@@ -103,30 +95,26 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "ovr": 91
+              "ovr": 91,
+              "manualX": 76.01390498261877,
+              "manualY": 79.80217156500483
             },
             {
-              "name": "Angel Di Maria",
+              "name": "Cristiano Ronaldo",
+              "ovr": 94,
               "pos": "FW",
-              "first": "SUB",
+              "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "ovr": 87
-            },
-            {
-              "name": "Diogo Dalot",
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 79
+              "manualX": 21.436848203939746,
+              "manualY": 83.62230686146324
             },
             {
               "name": "Geronimo Rulli",
               "pos": "GK",
               "first": "SUB",
-              "type": "FUTURE",
-              "emoji": "💗",
+              "type": "NORMAL",
+              "emoji": "",
               "ovr": 81
             },
             {
@@ -200,6 +188,22 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 84
+            },
+            {
+              "name": "Angel Di Maria",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "Diogo Dalot",
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 79
             }
           ]
         }
