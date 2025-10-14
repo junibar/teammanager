@@ -479,8 +479,8 @@ document.getElementById("bulkAddBtn").addEventListener("click",()=>{
     const T=(type||"NORMAL").toUpperCase();
     if(T==="FUTURE" && countTypeAll(currentTeamObj(), "FUTURE") >= 1){ alert("FUTURE(퓨쳐)는 팀당 한 명만 가능합니다. 해당 줄은 건너뜁니다: "+(name||"")); return; }
     let em = emoji||""; if(!em){ if(T==="ICON") em="⭐"; else if(T==="TAEGUEK") em="🔹"; else if(T==="AMIGO") em="🩶"; else if(T==="FUTURE") em="💗"; }
-    t.roster.push({name:name||"", pos:(pos||"DF").toUpperCase(), first:((first||"SUB").toUpperCase()==="FIRST"?"FIRST":"SUB"),
-      type:T, emoji:em, ovr: Math.max(1,Math.min(99, Number(ovr)||70)) });
+    t.roster.push({name:name||"", ovr: Math.max(1,Math.min(99, Number(ovr)||70)), pos:(pos||"DF").toUpperCase(), first:((first||"SUB").toUpperCase()==="FIRST"?"FIRST":"SUB"),
+      type:T, emoji:em});
   });
   refreshRosterTable(); saveAll(); draw();
 });
