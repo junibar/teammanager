@@ -38,6 +38,62 @@
               "ovr": 90
             },
             {
+              "name": "김태영",
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "TAEGUEK",
+              "emoji": "🔹",
+              "ovr": 86
+            },
+            {
+              "name": "Rodri",
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 70
+            },
+            {
+              "name": "Tijjani Reijnders",
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 70
+            },
+            {
+              "name": "Bruno Fernandes",
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 70
+            },
+            {
+              "name": "Cristiano Ronaldo",
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "ICON",
+              "emoji": "⭐",
+              "ovr": 70
+            },
+            {
+              "name": "Erling Haaland",
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 70
+            },
+            {
+              "name": "Kylian Mbappe",
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 70
+            },
+            {
               "name": "Geronimo Rulli",
               "pos": "GK",
               "first": "SUB",
@@ -70,24 +126,16 @@
               "ovr": 70
             },
             {
-              "name": "David Alaba",
-              "pos": "82",
+              "name": "Pau Cubarsi",
+              "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
               "ovr": 70
             },
             {
-              "name": "김태영",
-              "pos": "86",
-              "first": "SUB",
-              "type": "태극(🔹)",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Pau Cubarsi",
-              "pos": "82",
+              "name": "David Alaba",
+              "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
@@ -95,15 +143,7 @@
             },
             {
               "name": "Pierre-Emile Hojbjerg",
-              "pos": "81",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Rodri",
-              "pos": "90",
+              "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
@@ -111,23 +151,7 @@
             },
             {
               "name": "Rayan Cherki",
-              "pos": "81",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Tijjani Reijnders",
-              "pos": "86",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Bruno Fernandes",
-              "pos": "87",
+              "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
@@ -135,7 +159,7 @@
             },
             {
               "name": "Matheus Cunha",
-              "pos": "83",
+              "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
@@ -143,49 +167,25 @@
             },
             {
               "name": "Angel Di Maria",
-              "pos": "87",
+              "pos": "FW",
               "first": "SUB",
-              "type": "아이콘(⭐)",
-              "emoji": "",
+              "type": "ICON",
+              "emoji": "⭐",
               "ovr": 70
             },
             {
               "name": "Bryan Mbeumo",
-              "pos": "85",
+              "pos": "FW",
               "first": "SUB",
               "type": "NORMAL",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Erling Haaland",
-              "pos": "90",
-              "first": "SUB",
-              "type": "히어로(♦️)",
               "emoji": "",
               "ovr": 70
             },
             {
               "name": "Omar Marmoush",
-              "pos": "84",
+              "pos": "FW",
               "first": "SUB",
               "type": "NORMAL",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Cristiano Ronaldo",
-              "pos": "94",
-              "first": "SUB",
-              "type": "아이콘(⭐)",
-              "emoji": "",
-              "ovr": 70
-            },
-            {
-              "name": "Kylian Mbappe",
-              "pos": "91",
-              "first": "SUB",
-              "type": "히어로(♦️)",
               "emoji": "",
               "ovr": 70
             }
