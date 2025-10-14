@@ -106,89 +106,89 @@
               "name": "GK",
               "pos": "GK",
               "first": "FIRST",
-              "ovr": 70,
+              "ovr": 75,
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "DF1",
+              "name": "RB",
               "pos": "DF",
-              "first": "FIRST",
-              "ovr": 68,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "DF2",
-              "pos": "DF",
-              "first": "FIRST",
-              "ovr": 69,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "DF3",
-              "pos": "DF",
-              "first": "FIRST",
-              "ovr": 68,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "DF4",
-              "pos": "DF",
-              "first": "FIRST",
-              "ovr": 67,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "MF1",
-              "pos": "MF",
-              "first": "FIRST",
-              "ovr": 71,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "MF2",
-              "pos": "MF",
               "first": "FIRST",
               "ovr": 72,
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "MF3",
-              "pos": "MF",
-              "first": "FIRST",
-              "ovr": 70,
-              "type": "TAEGUEK",
-              "emoji": "🔹"
-            },
-            {
-              "name": "FW1",
-              "pos": "FW",
+              "name": "RCB",
+              "pos": "DF",
               "first": "FIRST",
               "ovr": 73,
               "type": "AMIGO",
               "emoji": "🩶"
             },
             {
-              "name": "FW2",
-              "pos": "FW",
+              "name": "LCB",
+              "pos": "DF",
               "first": "FIRST",
               "ovr": 74,
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "LB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "FW3",
+              "name": "RM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 77,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "CM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "LM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 76,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RW",
               "pos": "FW",
-              "first": "SUB",
-              "ovr": 65,
-              "type": "ICON",
-              "emoji": "⭐"
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "LW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 79,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "ST",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 80,
+              "type": "FUTURE",
+              "emoji": "💗"
             }
           ]
         }
