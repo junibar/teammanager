@@ -118,14 +118,6 @@
               "ovr": 81
             },
             {
-              "name": "John Stones",
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 82
-            },
-            {
               "name": "Nathan Ake",
               "pos": "DF",
               "first": "SUB",
@@ -134,7 +126,7 @@
               "ovr": 83
             },
             {
-              "name": "Pau Cubarsi",
+              "name": "John Stones",
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
@@ -150,20 +142,12 @@
               "ovr": 82
             },
             {
-              "name": "Rayan Cherki",
-              "pos": "MF",
+              "name": "Pau Cubarsi",
+              "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
-              "ovr": 81
-            },
-            {
-              "name": "Pierre-Emile Hojbjerg",
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 81
+              "ovr": 82
             },
             {
               "name": "Matheus Cunha",
@@ -172,6 +156,22 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 83
+            },
+            {
+              "name": "Angel Di Maria",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "Rayan Cherki",
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 81
             },
             {
               "name": "Bryan Mbeumo",
@@ -190,12 +190,12 @@
               "ovr": 84
             },
             {
-              "name": "Angel Di Maria",
-              "ovr": 87,
+              "name": "Pierre-Emile Hojbjerg",
               "pos": "MF",
               "first": "SUB",
-              "type": "ICON",
-              "emoji": "⭐"
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 81
             },
             {
               "name": "Diogo Dalot",
