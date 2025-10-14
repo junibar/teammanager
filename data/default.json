@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEGU",
+      "currentTeam": "DAEJEON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -204,6 +204,216 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 79
+            }
+          ]
+        },
+        "DAEJEON": {
+          "roster": [
+            {
+              "name": "Alisson",
+              "ovr": 89,
+              "pos": "GK",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Milos Kerkez",
+              "ovr": 88,
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 11.956521739130435,
+              "manualY": 29.07624807304637
+            },
+            {
+              "name": "Jeremy Frimpong",
+              "ovr": 83,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 87.07729468599034,
+              "manualY": 26.23028578204672
+            },
+            {
+              "name": "Virgil van Dijk",
+              "ovr": 90,
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 36.11111111111111,
+              "manualY": 23.384323491047077
+            },
+            {
+              "name": "Ibrahima Konate",
+              "ovr": 86,
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 64.00966183574879,
+              "manualY": 23.384323491047077
+            },
+            {
+              "name": "Alexis Mac Allister",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 62.31884057971014,
+              "manualY": 47.48013755484406
+            },
+            {
+              "name": "Frankie de Jong",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 39.251207729468604,
+              "manualY": 47.48013755484406
+            },
+            {
+              "name": "Zinedine Zidane",
+              "ovr": 94,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 50.24154589371981,
+              "manualY": 67.02241195304163
+            },
+            {
+              "name": "손흥민",
+              "ovr": 90,
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "AMIGO",
+              "emoji": "➕",
+              "manualX": 50,
+              "manualY": 89.22091782283886
+            },
+            {
+              "name": "Mohamed Salah",
+              "ovr": 91,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 76.69082125603865,
+              "manualY": 79.35491521404008
+            },
+            {
+              "name": "Vini Jr.",
+              "ovr": 89,
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 21.256038647342994,
+              "manualY": 80.68303094983992
+            },
+            {
+              "name": "Didier Drogba",
+              "ovr": 89,
+              "pos": "FW",
+              "first": "SUB",
+              "type": "AMIGO",
+              "emoji": "➕"
+            },
+            {
+              "name": "Luis Figo",
+              "ovr": 89,
+              "pos": "FW",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "Florian Wirtz",
+              "ovr": 89,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Dominik Szoboszlai",
+              "ovr": 84,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Cody Gakpo",
+              "ovr": 84,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Eduardo Camavinga",
+              "ovr": 83,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Jose Maria Gimenez",
+              "ovr": 83,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Alex Baena",
+              "ovr": 84,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Conor Gallagher",
+              "ovr": 81,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Renato Veiga",
+              "ovr": 74,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Daniel James",
+              "ovr": 77,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Juan Musso",
+              "ovr": 79,
+              "pos": "GK",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 50.24154589371981,
+              "manualY": 41.02928969524487
             }
           ]
         }
