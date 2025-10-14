@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEJEON",
+      "currentTeam": "DAEGU",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -414,6 +414,282 @@
               "emoji": "",
               "manualX": 50.24154589371981,
               "manualY": 41.02928969524487
+            }
+          ]
+        },
+        "SEOUL": {
+          "roster": [
+            {
+              "name": "GK",
+              "pos": "GK",
+              "first": "FIRST",
+              "ovr": 75,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 73,
+              "type": "AMIGO",
+              "emoji": "➕"
+            },
+            {
+              "name": "LCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 74,
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "LB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 77,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "CM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "LM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 76,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "LW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 79,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "ST",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 80,
+              "type": "FUTURE",
+              "emoji": "💗"
+            }
+          ]
+        },
+        "GWANGJU": {
+          "roster": [
+            {
+              "name": "GK",
+              "pos": "GK",
+              "first": "FIRST",
+              "ovr": 75,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 73,
+              "type": "AMIGO",
+              "emoji": "➕"
+            },
+            {
+              "name": "LCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 74,
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "LB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 77,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "CM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "LM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 76,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "LW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 79,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "ST",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 80,
+              "type": "FUTURE",
+              "emoji": "💗"
+            }
+          ]
+        },
+        "SUWON": {
+          "roster": [
+            {
+              "name": "GK",
+              "pos": "GK",
+              "first": "FIRST",
+              "ovr": 75,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 73,
+              "type": "AMIGO",
+              "emoji": "➕"
+            },
+            {
+              "name": "LCB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 74,
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "LB",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 77,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "CM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "LM",
+              "pos": "MF",
+              "first": "FIRST",
+              "ovr": 76,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "RW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 78,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "LW",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 79,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "ST",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 80,
+              "type": "FUTURE",
+              "emoji": "💗"
             }
           ]
         }
