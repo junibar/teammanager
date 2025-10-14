@@ -151,7 +151,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function select11(t){const r=Array.isArray(t.roster)?t.roster:[];const f=r.filter(p=>p.first==="FIRST");const s=r.filter(p=>p.first!=="FIRST");let pick=f.slice(0,11);for(const x of s){if(pick.length>=11)break;pick.push(x)}const isGK=pl=>String(pl.pos||pl.name||"").toUpperCase()==="GK";if(!pick.some(isGK)){const gk=r.find(isGK);if(gk){if(pick.length<11)pick.push(gk);else pick[pick.length-1]=gk}}return pick.slice(0,11)}
   function buildSlots(players){const Y={GK:8,DF:22,MF:52,FW:84}, slots=[{role:"GK",x:50,y:Y.GK}], cnt={DF:0,MF:0,FW:0};players.forEach(p=>{const g=group(p.pos);cnt[g]=(cnt[g]||0)+((g==="GK")?0:1)});spaced(Math.max(1,cnt.DF||4),68).forEach(x=>slots.push({role:"DF",x,y:Y.DF}));spaced(Math.max(1,cnt.MF||4),68).forEach(x=>slots.push({role:"MF",x,y:Y.MF}));spaced(Math.max(1,cnt.FW||2),44).forEach(x=>slots.push({role:"FW",x,y:Y.FW}));return slots}
   function tokens(){const t=curT();const picked=select11(t);const slots=buildSlots(picked);const used=new Set();const out=[];const take=(g)=>{for(let i=0;i<slots.length;i++){const s=slots[i];if(used.has(i))continue;if(s.role===g){used.add(i);return s}}return null};const any=()=>{for(let i=0;i<slots.length;i++){if(!used.has(i)){used.add(i);return slots[i]}}return{x:50,y:52,role:"MF"}};for(const p of picked){const g=group(p.pos);let spot=take(g)||any();const x=(p.manualX!=null&&p.manualY!=null)?p.manualX:spot.x;const y=(p.manualX!=null&&p.manualY!=null)?p.manualY:spot.y;out.push({p,x,y})}return out}
-  function drawPlayers(){for(const tk of tokens()){const {x,y}=xyToCanvas(tk.x,tk.y);const g=group(tk.p.pos);const color=(g==="GK")?"#21d07a":(g==="DF")?"#4da3ff":(g==="MF")?"#ffd24d":"#ff6f6f";ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.fillStyle="rgba(0,0,0,.25)";ctx.fill();ctx.beginPath();ctx.arc(x,y-1,18,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle="rgba(255,255,255,.75)";ctx.stroke();let badge="";const t=(tk.p.type||"NORMAL");if(t==="ICON")badge=(tk.p.emoji||"⭐");else if(t==="TAEGUEK")badge=(tk.p.emoji||"🔹");else if(t==="AMIGO")badge=(tk.p.emoji||"🩶");else if(t==="FUTURE")badge=(tk.p.emoji||"💗");if(badge){ctx.font="18px 'Apple Color Emoji','Segoe UI Emoji',system-ui";ctx.textAlign="center";ctx.textBaseline="bottom";ctx.fillText(badge,x,y-22)}const nm=(tk.p.name||"").trim();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba(255,255,255,.95)";ctx.strokeStyle="rgba(0,0,0,.35)";ctx.lineWidth=3;ctx.strokeText(nm,x,y-1);ctx.fillText(nm,x,y-1)}}
+  function drawPlayers(){for(const tk of tokens()){const {x,y}=xyToCanvas(tk.x,tk.y);const g=group(tk.p.pos);const color=(g==="GK")?"#21d07a":(g==="DF")?"#4da3ff":(g==="MF")?"#ffd24d":"#ff6f6f";ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.fillStyle="rgba(0,0,0,.25)";ctx.fill();ctx.beginPath();ctx.arc(x,y-1,18,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle="rgba(255,255,255,.75)";ctx.stroke();let badge="";const t=(tk.p.type||"NORMAL");if(t==="ICON")badge=(tk.p.emoji||"⭐");else if(t==="TAEGUEK")badge=(tk.p.emoji||"🔹");else if(t==="AMIGO")badge=(tk.p.emoji||"🩶");else if(t==="FUTURE")badge=(tk.p.emoji||"💗");if(badge){ctx.font="18px 'Apple Color Emoji','Segoe UI Emoji',system-ui";ctx.textAlign="center";ctx.textBaseline="bottom";ctx.fillText(badge,x,y-22)}const nm=(tk.p.name||"").trim();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba(255,255,255,.95)";ctx.strokeStyle="rgba(0,0,0,.35)";ctx.lineWidth=3;ctx.strokeText(nm,x,y-1);ctx.fillText(nm,x,y-1);// === OVR 등급 표기 (이름 아래쪽) ===
+const ovr = Number(tk.p.ovr||0);
+function ovrColor(v){
+  if(v >= 90) return "#F5C542";      // 금빛
+  if(v >= 87) return "#4DD0E1";      // 민트블루
+  if(v >= 84) return "#B78CFF";      // 보라
+  if(v >= 80) return "#6EE7B7";      // 민트그린
+  return "#9AA4B2";                  // 그레이
+}
+ctx.font = "12px system-ui, -apple-system, 'Segoe UI', Roboto";
+ctx.textAlign = "center";
+ctx.textBaseline = "top";
+ctx.fillStyle = ovrColor(ovr);
+ctx.strokeStyle = "rgba(0,0,0,.45)";
+ctx.lineWidth = 3;
+// 이름 원형 바로 아래(y+22 지점)에 테두리+채움으로 가독성 확보
+ctx.strokeText(String(ovr), x, y + 22);
+ctx.fillText(String(ovr),   x, y + 22);}}
   function draw(){drawPitch();drawPlayers();refreshSubs()}
   let drag=-1;const hit=(mx,my)=>{const ts=tokens();for(let i=ts.length-1;i>=0;i--){const {x,y}=xyToCanvas(ts[i].x,ts[i].y);const dx=mx-x,dy=my-y;if(dx*dx+dy*dy<=24*24)return i}return-1}
   const tokRef=(idx)=>{const ts=tokens();if(idx<0||idx>=ts.length)return null;const tk=ts[idx];const p=curT().roster.find(pp=>pp===tk.p);return{tk,p}}
@@ -161,15 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // roster table
   const tbody=qs("#rosterTable tbody");
-  function refreshRoster(){const t=curT();tbody.innerHTML="";(t.roster||[]).forEach((p,idx)=>{const tr=document.createElement("tr");tr.draggable=true;tr.innerHTML=`<td class="drag w-del">≡</td><td class="w-num">${idx+1}</td><td class="w-name"><input type="text" value="${p.name??""}"></td><td class="w-ovr"><input type="number" min="1" max="99" value="${p.ovr??70}"></td><td class="w-pos"><select><option>GK</option><option>DF</option><option>MF</option><option>FW</option></select></td><td class="w-first"><select><option>FIRST</option><option>SUB</option></select></td><td class="w-type"><div class="typeWrap"><select class="ptype"><option value="NORMAL">일반</option><option value="ICON">아이콘</option><option value="TAEGUEK">태극</option><option value="AMIGO">아미고</option><option value="FUTURE">퓨쳐</option></select><input class="emoji" type="text" maxlength="2" placeholder="⭐/🔹/🩶/💗"/></div></td><td class="w-del"><button class="ghost">-</button></td>`;const nameEl=tr.children[2].firstElementChild,ovrEl=tr.children[3].firstElementChild,posSel=tr.children[4].firstElementChild,firstSel=tr.children[5].firstElementChild,typeSel=tr.querySelector(".ptype"),emojiEl=tr.querySelector(".emoji"),delBtn=tr.children[7].firstElementChild;posSel.value=p.pos||"DF";firstSel.value=p.first||"SUB";typeSel.value=p.type||"NORMAL";// 🔒 고정 이모지 적용 + 입력 잠금
+  function refreshRoster(){const t=curT();tbody.innerHTML="";(t.roster||[]).forEach((p,idx)=>{const tr=document.createElement("tr");tr.draggable=true;tr.innerHTML=`<td class="drag w-del">≡</td><td class="w-num">${idx+1}</td><td class="w-name"><input type="text" value="${p.name??""}"></td><td class="w-ovr"><input type="number" min="1" max="99" value="${p.ovr??70}"></td><td class="w-pos"><select><option>GK</option><option>DF</option><option>MF</option><option>FW</option></select></td><td class="w-first"><select><option>FIRST</option><option>SUB</option></select></td><td class="w-type"><div class="typeWrap"><select class="ptype"><option value="NORMAL">일반</option><option value="ICON">아이콘</option><option value="TAEGUEK">태극</option><option value="AMIGO">아미고</option><option value="FUTURE">퓨쳐</option></select><span class="emojiShow" style="opacity:.8;"></span></div></td><td class="w-del"><button class="ghost">-</button></td>`;const nameEl=tr.children[2].firstElementChild,ovrEl=tr.children[3].firstElementChild,posSel=tr.children[4].firstElementChild,firstSel=tr.children[5].firstElementChild,typeSel=tr.querySelector(".ptype"),emojiShow=tr.querySelector(".emojiShow"),delBtn=tr.children[7].firstElementChild;posSel.value=p.pos||"DF";firstSel.value=p.first||"SUB";typeSel.value=p.type||"NORMAL";// 🔒 고정 이모지 적용 + 입력 잠금
 p.emoji = TYPE_EMOJI[p.type || "NORMAL"] || "";
-emojiEl.value = p.emoji;
-emojiEl.readOnly = true;      // 사용자가 바꿀 수 없게
-emojiEl.style.opacity = 0.7;  // 잠금 느낌만 살짝 (선택 사항)
-emojiEl.style.display=(["ICON","TAEGUEK","AMIGO","FUTURE"].includes(typeSel.value))?"block":"none";nameEl.addEventListener("input",()=>{p.name=nameEl.value;saveAll();draw()});ovrEl.addEventListener("change",()=>{p.ovr=Math.max(1,Math.min(99,Number(ovrEl.value)||70));saveAll();draw()});posSel.addEventListener("change",()=>{p.pos=posSel.value;saveAll();draw()});firstSel.addEventListener("change",()=>{p.first=firstSel.value;saveAll();draw()});typeSel.addEventListener("change", ()=>{
-  p.type  = typeSel.value;
-  p.emoji = TYPE_EMOJI[p.type] || "";  // 타입과 항상 동기화
-  emojiEl.value = p.emoji;             // 표시값 갱신
+emojiShow.textContent=p.emoji;
+
+// 핸들러
+typeSel.addEventListener("change", ()=>{
+  p.type = typeSel.value;
+  p.emoji = TYPE_EMOJI[p.type] || "";
+  emojiShow.textContent = p.emoji; // 고정 이모지 반영
   saveAll(); draw();
 });
 delBtn.addEventListener("click",()=>{t.roster.splice(idx,1);refreshRoster();saveAll();draw()});tr.addEventListener("dragstart",(e)=>{e.dataTransfer.setData("text/plain",String(idx));tr.style.opacity=.5});tr.addEventListener("dragend",()=>{tr.style.opacity=""});tr.addEventListener("dragover",(e)=>{e.preventDefault();tr.style.outline="1px dashed #3a4a66"});tr.addEventListener("dragleave",()=>{tr.style.outline=""});tr.addEventListener("drop",(e)=>{e.preventDefault();tr.style.outline="";const from=Number(e.dataTransfer.getData("text/plain"));const to=idx;if(Number.isInteger(from)&&from!==to){const arr=t.roster;const moved=arr.splice(from,1)[0];arr.splice(to,0,moved);refreshRoster();saveAll();draw()}});tbody.appendChild(tr)})}
