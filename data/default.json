@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "GWANGJU",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -862,92 +862,212 @@
         "SUWON": {
           "roster": [
             {
-              "name": "GK",
+              "name": "Ugurcan Cakir",
+              "ovr": 79,
               "pos": "GK",
               "first": "FIRST",
-              "ovr": 75,
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "RB",
+              "name": "Sead Kolasinac",
+              "ovr": 80,
               "pos": "DF",
               "first": "FIRST",
-              "ovr": 72,
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 16.183574879227052,
+              "manualY": 32.30167200284596
+            },
+            {
+              "name": "Davinson Sanchez",
+              "ovr": 82,
+              "pos": "DF",
+              "first": "FIRST",
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "RCB",
+              "name": "Franz Beckenbauer",
+              "ovr": 92,
               "pos": "DF",
               "first": "FIRST",
-              "ovr": 73,
               "type": "AMIGO",
               "emoji": "➕"
             },
             {
-              "name": "LCB",
-              "pos": "DF",
-              "first": "FIRST",
-              "ovr": 74,
-              "type": "ICON",
-              "emoji": "⭐"
-            },
-            {
-              "name": "LB",
-              "pos": "DF",
-              "first": "FIRST",
-              "ovr": 72,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "RM",
-              "pos": "MF",
-              "first": "FIRST",
-              "ovr": 77,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "CM",
-              "pos": "MF",
-              "first": "FIRST",
-              "ovr": 78,
-              "type": "TAEGUEK",
-              "emoji": "🔹"
-            },
-            {
-              "name": "LM",
-              "pos": "MF",
-              "first": "FIRST",
-              "ovr": 76,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "RW",
-              "pos": "FW",
-              "first": "FIRST",
-              "ovr": 78,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "LW",
-              "pos": "FW",
-              "first": "FIRST",
-              "ovr": 79,
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "ST",
-              "pos": "FW",
-              "first": "FIRST",
+              "name": "Ferdi Kadioglu",
               "ovr": 80,
-              "type": "FUTURE",
-              "emoji": "💗"
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 83.45410628019324,
+              "manualY": 35.90655757144551
+            },
+            {
+              "name": "Lucas Torreira",
+              "ovr": 83,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 60.99033816425121,
+              "manualY": 49.377445748843826
+            },
+            {
+              "name": "이을용",
+              "ovr": 85,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "AMIGO",
+              "emoji": "➕",
+              "manualX": 38.405797101449274,
+              "manualY": 48.61852247124393
+            },
+            {
+              "name": "Charles De Ketelaere",
+              "ovr": 81,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 27.294685990338163,
+              "manualY": 76.50895292304044
+            },
+            {
+              "name": "Yankuba Minteh",
+              "ovr": 77,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 73.79227053140096,
+              "manualY": 78.97545357524012
+            },
+            {
+              "name": "Victor Osimhen",
+              "ovr": 87,
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 47.10144927536232,
+              "manualY": 90.73876437803867
+            },
+            {
+              "name": "Dirk Kuyt",
+              "ovr": 86,
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "AMIGO",
+              "emoji": "➕",
+              "manualX": 55.072463768115945,
+              "manualY": 72.33487489624095
+            },
+            {
+              "name": "Rui Patricio",
+              "ovr": 75,
+              "pos": "GK",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Kaan Ayhan",
+              "ovr": 75,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Odilon Kossounou",
+              "ovr": 80,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Berat Djimsiti",
+              "ovr": 79,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Giorgio Scalvini",
+              "ovr": 78,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Jan Paul van Hecke",
+              "ovr": 78,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Adam Webster",
+              "ovr": 75,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Nikola Krstovic",
+              "ovr": 75,
+              "pos": "FW",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Brajan Gruda",
+              "ovr": 74,
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Gabriel Sara",
+              "ovr": 79,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Diego Coppola",
+              "ovr": 72,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Eyup Aydin",
+              "ovr": 67,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Harry Howell",
+              "ovr": 62,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
             }
           ]
         }
