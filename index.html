@@ -133,6 +133,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const safeParse=(j,f)=>{try{const v=JSON.parse(j);return v??f}catch{return f}};
   const toast=(m)=>{const d=document.createElement('div');d.textContent=m;Object.assign(d.style,{position:'fixed',right:'14px',bottom:'14px',background:'#0f1b2b',border:'1px solid #203149',color:'#cfe3ff',padding:'8px 12px',borderRadius:'10px',zIndex:99});document.body.appendChild(d);setTimeout(()=>d.remove(),1500)};
 
+  // ---- GitHub Pages용 원격 상태 로더 ----
+async function fetchRemoteState(path="data/default.json"){
+  try{
+    // 동일 출처(GitHub Pages)에서 JSON 직로딩
+    const resp = await fetch(path + `?t=${Date.now()}`, { cache: "no-store" });
+    if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const js = await resp.json();
+    if(js && js.players){ return js; }
+    throw new Error("invalid schema");
+  }catch(e){
+    // 실패 시 null 반환 → 로컬 상태로 폴백
+    return null;
+  }
+}
+  
   // fixed emoji mapping (TAEGUEK 주의)
   const TYPE_EMOJI = { NORMAL:"", ICON:"⭐", TAEGUEK:"🔹", AMIGO:"➕", FUTURE:"💗" };
 
@@ -158,6 +173,21 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     currentPlayer: "JUNIBAR"
   });
+
+// ---- 원격이 있으면 원격으로 덮어쓰기 (자동 로드) ----
+let __booted = false;
+async function initStateThenBoot(){
+  // 1) 원격 시도
+  const remote = await fetchRemoteState("data/default.json");
+  if(remote && remote.players){
+    state = remote;
+    saveAll(); // 로컬에도 캐시
+  }
+  // 2) UI 부팅
+  refreshSelectors(); refreshRoster(); fitCanvas(); draw();
+  __booted = true;
+}
+  
   const saveAll=()=>localStorage.setItem(LS_KEY, JSON.stringify(state));
   const curP = ()=>state.players[state.currentPlayer];
   const curT = ()=>curP().teams[curP().currentTeam];
@@ -356,9 +386,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener("keydown",(e)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveAll();saveGithub()}});
 
   // init
-  function boot(){refreshSelectors();refreshRoster();fitCanvas();draw()}
-  window.addEventListener("resize",()=>{fitCanvas();draw()});
-  boot();
+function boot(){ /* 사용 안 함: 원격/로컬을 initStateThenBoot 안에서 처리 */ }
+window.addEventListener("resize",()=>{ if(__booted){ fitCanvas(); draw(); } });
+// 원격 우선 → 실패 시 로컬 폴백으로 UI 부팅
+initStateThenBoot();
+
 });
 </script>
 </body>
