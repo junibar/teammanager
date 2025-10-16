@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEGU",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -900,12 +900,12 @@
               "manualY": 22.056207755247243
             },
             {
-              "name": "송종국",
+              "name": "Daniel Alves",
               "pos": "DF",
               "first": "SUB",
-              "ovr": 86,
-              "type": "TAEGUEK",
-              "emoji": "🔹",
+              "ovr": 89,
+              "type": "ICON",
+              "emoji": "⭐",
               "manualX": 83.81642512077295,
               "manualY": 32.681133641645914
             },
@@ -960,14 +960,14 @@
               "manualY": 76.12949128424049
             },
             {
-              "name": "Steven Gerrard",
+              "name": "Jude Bellingham",
               "pos": "MF",
-              "first": "SUB",
-              "ovr": 88,
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 49.8792270531401,
-              "manualY": 62.84833392624214
+              "first": "FIRST",
+              "ovr": 92,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 50.36231884057971,
+              "manualY": 63.607257203842046
             },
             {
               "name": "Ugurcan Cakir",
