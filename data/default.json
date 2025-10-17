@@ -76,8 +76,8 @@
               "ovr": 87,
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 56.763285024154584,
-              "manualY": 61.33048737104233
+              "manualX": 58.69565217391305,
+              "manualY": 62.84833392624214
             },
             {
               "name": "Erling Haaland",
@@ -96,8 +96,8 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 91,
-              "manualX": 72.70531400966183,
-              "manualY": 81.06249258863987
+              "manualX": 69.20289855072464,
+              "manualY": 83.90845487963952
             },
             {
               "name": "Cristiano Ronaldo",
@@ -132,6 +132,14 @@
               "pos": "MF",
               "first": "SUB",
               "ovr": 86,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "이청용",
+              "pos": "MF",
+              "first": "SUB",
+              "ovr": 87,
               "type": "TAEGUEK",
               "emoji": "🔹"
             },
