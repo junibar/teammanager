@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SUWON",
+      "currentTeam": "GWANGJU",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -819,9 +819,9 @@
               "name": "Willian Pacho",
               "pos": "DF",
               "first": "FIRST",
-              "ovr": 86,
-              "type": "NORMAL",
-              "emoji": "",
+              "ovr": 90,
+              "type": "ICON",
+              "emoji": "⭐",
               "manualX": 36.35265700483092,
               "manualY": 25.091900865646867
             },
@@ -886,12 +886,12 @@
               "manualY": 78.02679947824025
             },
             {
-              "name": "Neymar Jr",
+              "name": "Kylian Mbappe",
               "pos": "FW",
               "first": "FIRST",
               "ovr": 91,
-              "type": "ICON",
-              "emoji": "⭐",
+              "type": "NORMAL",
+              "emoji": "",
               "manualX": 26.08695652173913,
               "manualY": 78.21653029764022
             },
@@ -1519,5 +1519,5 @@
       }
     }
   },
-  "currentPlayer": "D0PAM1NE"
+  "currentPlayer": "JUNIBAR"
 }
