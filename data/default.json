@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SEOUL",
+      "currentTeam": "DAEJEON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -229,13 +229,13 @@
             },
             {
               "name": "Jeremy Frimpong",
-              "ovr": 83,
-              "pos": "MF",
+              "ovr": 89,
+              "pos": "DF",
               "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 84.05797101449275,
-              "manualY": 34.3887110162457
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 83.45410628019324,
+              "manualY": 34.198980196845724
             },
             {
               "name": "Virgil van Dijk",
@@ -730,8 +730,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 70.16908212560386,
-              "manualY": 67.40187359184158
+              "manualX": 62.07729468599034,
+              "manualY": 65.88402703664177
             },
             {
               "name": "Frank Lampard",
