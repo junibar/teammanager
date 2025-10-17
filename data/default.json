@@ -144,6 +144,22 @@
               "emoji": "🔹"
             },
             {
+              "name": "Geronimo Rulli",
+              "pos": "GK",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 81
+            },
+            {
+              "name": "Denzel Dumfries",
+              "pos": "DF",
+              "first": "SUB",
+              "ovr": 86,
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
               "name": "Nathan Ake",
               "pos": "DF",
               "first": "SUB",
@@ -160,12 +176,12 @@
               "ovr": 82
             },
             {
-              "name": "Geronimo Rulli",
-              "pos": "GK",
+              "name": "Matheus Cunha",
+              "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
-              "ovr": 81
+              "ovr": 83
             },
             {
               "name": "Bryan Mbeumo",
@@ -174,14 +190,6 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 85
-            },
-            {
-              "name": "Matheus Cunha",
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 83
             },
             {
               "name": "Omar Marmoush",
