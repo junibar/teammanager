@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SEOUL",
+      "currentTeam": "GWANGJU",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -796,22 +796,34 @@
               "emoji": ""
             },
             {
-              "name": "Ferland Mendy",
-              "ovr": 81,
+              "name": "Roberto Carlos",
               "pos": "DF",
               "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 13.405797101449277,
-              "manualY": 39.51144314004506
+              "ovr": 90,
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 14.734299516908212,
+              "manualY": 36.47575002964544
             },
             {
-              "name": "Eder Militao",
-              "ovr": 84,
+              "name": "차두리",
               "pos": "DF",
               "first": "FIRST",
+              "ovr": 88,
+              "type": "TAEGUEK",
+              "emoji": "🔹",
+              "manualX": 84.54106280193237,
+              "manualY": 35.90655757144551
+            },
+            {
+              "name": "Willian Pacho",
+              "pos": "DF",
+              "first": "FIRST",
+              "ovr": 86,
               "type": "NORMAL",
-              "emoji": ""
+              "emoji": "",
+              "manualX": 36.35265700483092,
+              "manualY": 25.091900865646867
             },
             {
               "name": "William Saliba",
@@ -819,17 +831,9 @@
               "pos": "DF",
               "first": "FIRST",
               "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Trent Alexander-Arnold",
-              "ovr": 86,
-              "pos": "DF",
-              "first": "FIRST",
-              "type": "NORMAL",
               "emoji": "",
-              "manualX": 77.77777777777779,
-              "manualY": 33.629787738645796
+              "manualX": 60.26570048309179,
+              "manualY": 26.23028578204672
             },
             {
               "name": "Declan Rice",
@@ -838,8 +842,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 53.2608695652174,
-              "manualY": 45.77256018024428
+              "manualX": 38.28502415458937,
+              "manualY": 48.61852247124393
             },
             {
               "name": "Martin Odegaard",
@@ -848,28 +852,18 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 62.07729468599034,
+              "manualX": 46.4975845410628,
               "manualY": 65.88402703664177
             },
             {
-              "name": "Frank Lampard",
-              "ovr": 87,
+              "name": "Moises Caicedo",
               "pos": "MF",
               "first": "FIRST",
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 42.632850241545896,
-              "manualY": 64.93537293964188
-            },
-            {
-              "name": "Gabriel Martinelli",
-              "ovr": 81,
-              "pos": "FW",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 27.053140096618357,
-              "manualY": 79.54464603344006
+              "ovr": 90,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 57.729468599033815,
+              "manualY": 50.13636902644373
             },
             {
               "name": "Jonathan David",
@@ -878,8 +872,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 51.690821256038646,
-              "manualY": 85.80576307363927
+              "manualX": 47.22222222222222,
+              "manualY": 90.16957191983873
             },
             {
               "name": "Karl-Heinz Rummenigge",
@@ -888,8 +882,18 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 74.27536231884058,
-              "manualY": 81.06249258863987
+              "manualX": 70.41062801932367,
+              "manualY": 78.02679947824025
+            },
+            {
+              "name": "Neymar Jr",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 91,
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 26.08695652173913,
+              "manualY": 78.21653029764022
             },
             {
               "name": "Darren Fletcher",
@@ -897,7 +901,29 @@
               "pos": "MF",
               "first": "SUB",
               "type": "AMIGO",
-              "emoji": "➕"
+              "emoji": "➕",
+              "manualX": 39.371980676328505,
+              "manualY": 65.12510375904186
+            },
+            {
+              "name": "Frank Lampard",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 39.61352657004831,
+              "manualY": 61.89967982924226
+            },
+            {
+              "name": "Trent Alexander-Arnold",
+              "ovr": 86,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 82.3671497584541,
+              "manualY": 41.788212972844775
             },
             {
               "name": "Riccardo Calafiori",
@@ -908,12 +934,42 @@
               "emoji": ""
             },
             {
+              "name": "Ferland Mendy",
+              "ovr": 81,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 13.405797101449277,
+              "manualY": 39.51144314004506
+            },
+            {
+              "name": "Eder Militao",
+              "ovr": 84,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 38.04347826086957,
+              "manualY": 23.004861852247124
+            },
+            {
               "name": "Matheus",
               "ovr": 78,
               "pos": "GK",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": ""
+            },
+            {
+              "name": "Gabriel Martinelli",
+              "ovr": 81,
+              "pos": "FW",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 27.053140096618357,
+              "manualY": 79.54464603344006
             },
             {
               "name": "Owen Wijndal",
