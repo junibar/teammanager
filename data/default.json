@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEJEON",
+      "currentTeam": "SEOUL",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -488,24 +488,24 @@
               "emoji": ""
             },
             {
-              "name": "Alphonso Davies",
-              "ovr": 84,
+              "name": "Nuno Mendes",
+              "ovr": 90,
               "pos": "DF",
               "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 82.6086956521739,
-              "manualY": 29.26597889244634
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 18.357487922705314,
+              "manualY": 30.404363808846202
             },
             {
-              "name": "Nuno Mendes",
-              "ovr": 86,
+              "name": "홍명보",
               "pos": "DF",
               "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 14.492753623188406,
-              "manualY": 28.127593976046484
+              "ovr": 89,
+              "type": "TAEGUEK",
+              "emoji": "🔹",
+              "manualX": 39.251207729468604,
+              "manualY": 19.58970710304755
             },
             {
               "name": "Jonathan Tah",
@@ -524,18 +524,18 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 38.28502415458937,
-              "manualY": 19.58970710304755
+              "manualX": 86.47342995169082,
+              "manualY": 26.79947824024665
             },
             {
-              "name": "이탈로",
-              "ovr": 84,
+              "name": "Joao Neves",
               "pos": "MF",
               "first": "FIRST",
-              "type": "AMIGO",
-              "emoji": "➕",
-              "manualX": 38.28502415458937,
-              "manualY": 47.66986837424404
+              "ovr": 85,
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 39.492753623188406,
+              "manualY": 49.377445748843826
             },
             {
               "name": "Zico",
@@ -544,18 +544,28 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 61.83574879227053,
-              "manualY": 47.10067591604411
+              "manualX": 58.574879227053145,
+              "manualY": 50.70556148464366
             },
             {
-              "name": "안데르손",
-              "ovr": 87,
+              "name": "박지성",
               "pos": "MF",
               "first": "FIRST",
-              "type": "AMIGO",
-              "emoji": "➕",
-              "manualX": 18.59903381642512,
-              "manualY": 68.91972014704139
+              "ovr": 90,
+              "type": "TAEGUEK",
+              "emoji": "🔹",
+              "manualX": 17.51207729468599,
+              "manualY": 65.69429621724179
+            },
+            {
+              "name": "Alexander Isak",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 88,
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 39.73429951690821,
+              "manualY": 84.8571089766394
             },
             {
               "name": "Bukayo Saka",
@@ -564,8 +574,8 @@
               "first": "FIRST",
               "type": "FUTURE",
               "emoji": "💗",
-              "manualX": 80.55555555555556,
-              "manualY": 70.4375667022412
+              "manualX": 78.8647342995169,
+              "manualY": 66.07375785604174
             },
             {
               "name": "Harry Kane",
@@ -574,34 +584,56 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 60.7487922705314,
-              "manualY": 83.1495316020396
+              "manualX": 58.574879227053145,
+              "manualY": 82.77006996323965
+            },
+            {
+              "name": "안데르손",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "AMIGO",
+              "emoji": "➕",
+              "manualX": 18.59903381642512,
+              "manualY": 68.91972014704139
+            },
+            {
+              "name": "이탈로",
+              "ovr": 84,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "AMIGO",
+              "emoji": "➕",
+              "manualX": 38.28502415458937,
+              "manualY": 47.66986837424404
             },
             {
               "name": "Samuel Eto'o",
               "ovr": 89,
               "pos": "FW",
-              "first": "FIRST",
+              "first": "SUB",
               "type": "ICON",
               "emoji": "⭐",
               "manualX": 36.95652173913043,
               "manualY": 85.80576307363927
             },
             {
-              "name": "Juan Sebastian Veron",
-              "ovr": 86,
-              "pos": "MF",
+              "name": "황희찬",
+              "pos": "FW",
               "first": "SUB",
-              "type": "ICON",
-              "emoji": "⭐"
-            },
-            {
-              "name": "김승규",
-              "ovr": 86,
-              "pos": "GK",
-              "first": "SUB",
+              "ovr": 87,
               "type": "TAEGUEK",
               "emoji": "🔹"
+            },
+            {
+              "name": "Alphonso Davies",
+              "ovr": 84,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 41.30434782608695,
+              "manualY": 27.937863156646507
             },
             {
               "name": "Sven Botman",
@@ -622,14 +654,6 @@
               "emoji": ""
             },
             {
-              "name": "llia Zabarnyi",
-              "ovr": 78,
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
               "name": "Mohammed Kudus",
               "ovr": 80,
               "pos": "MF",
@@ -640,14 +664,6 @@
             {
               "name": "Eberechi Eze",
               "ovr": 83,
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Moleiro",
-              "ovr": 79,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
@@ -678,8 +694,24 @@
               "emoji": ""
             },
             {
+              "name": "llia Zabarnyi",
+              "ovr": 78,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
               "name": "Casemiro",
               "ovr": 80,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
+              "name": "Moleiro",
+              "ovr": 79,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
@@ -724,6 +756,22 @@
               "first": "SUB",
               "type": "NORMAL",
               "emoji": ""
+            },
+            {
+              "name": "Juan Sebastian Veron",
+              "ovr": 86,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐"
+            },
+            {
+              "name": "김승규",
+              "ovr": 86,
+              "pos": "GK",
+              "first": "SUB",
+              "type": "TAEGUEK",
+              "emoji": "🔹"
             }
           ]
         },
