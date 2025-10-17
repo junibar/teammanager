@@ -224,8 +224,8 @@
               "first": "FIRST",
               "type": "FUTURE",
               "emoji": "💗",
-              "manualX": 11.956521739130435,
-              "manualY": 29.07624807304637
+              "manualX": 14.734299516908212,
+              "manualY": 33.81951855804577
             },
             {
               "name": "Jeremy Frimpong",
@@ -234,8 +234,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 87.07729468599034,
-              "manualY": 26.23028578204672
+              "manualX": 84.05797101449275,
+              "manualY": 34.3887110162457
             },
             {
               "name": "Virgil van Dijk",
@@ -966,7 +966,7 @@
             {
               "name": "Jude Bellingham",
               "pos": "MF",
-              "first": "FIRST",
+              "first": "SUB",
               "ovr": 92,
               "type": "FUTURE",
               "emoji": "💗",
@@ -1122,14 +1122,6 @@
             {
               "name": "Eyup Aydin",
               "ovr": 67,
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Harry Howell",
-              "ovr": 62,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
