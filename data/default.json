@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SUWON",
+      "currentTeam": "SEOUL",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -428,32 +428,34 @@
               "emoji": ""
             },
             {
-              "name": "Jonathan Tah",
-              "ovr": 87,
-              "pos": "DF",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 61.71497584541063,
-              "manualY": 21.297284477647338
-            },
-            {
-              "name": "Sven Botman",
-              "ovr": 82,
-              "pos": "DF",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
               "name": "Alphonso Davies",
               "ovr": 84,
               "pos": "DF",
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 16.425120772946862,
+              "manualX": 82.6086956521739,
               "manualY": 29.26597889244634
+            },
+            {
+              "name": "Nuno Mendes",
+              "ovr": 86,
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 14.492753623188406,
+              "manualY": 28.127593976046484
+            },
+            {
+              "name": "Jonathan Tah",
+              "ovr": 87,
+              "pos": "DF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 61.35265700483091,
+              "manualY": 20.72809201944741
             },
             {
               "name": "전민광",
@@ -462,8 +464,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 83.33333333333334,
-              "manualY": 30.214632989446223
+              "manualX": 38.28502415458937,
+              "manualY": 19.58970710304755
             },
             {
               "name": "이탈로",
@@ -492,8 +494,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 17.995169082125603,
-              "manualY": 74.80137554844065
+              "manualX": 18.59903381642512,
+              "manualY": 68.91972014704139
             },
             {
               "name": "Bukayo Saka",
@@ -542,6 +544,14 @@
               "emoji": "⭐"
             },
             {
+              "name": "llia Zabarnyi",
+              "ovr": 78,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
+            },
+            {
               "name": "Moleiro",
               "ovr": 79,
               "pos": "MF",
@@ -558,12 +568,14 @@
               "emoji": ""
             },
             {
-              "name": "Hiroki Ito",
-              "ovr": 78,
+              "name": "Sven Botman",
+              "ovr": 82,
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
-              "emoji": ""
+              "emoji": "",
+              "manualX": 11.231884057971014,
+              "manualY": 29.645440531246294
             },
             {
               "name": "Josip Stanisic",
@@ -614,8 +626,8 @@
               "emoji": ""
             },
             {
-              "name": "Emil Krafth",
-              "ovr": 73,
+              "name": "Lucas Hernandez",
+              "ovr": 81,
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
@@ -648,14 +660,6 @@
             {
               "name": "Zeno Debast",
               "ovr": 77,
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Pape Gueye",
-              "ovr": 76,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
