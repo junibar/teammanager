@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEGU",
+      "currentTeam": "DAEJEON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -252,14 +252,14 @@
               "emoji": ""
             },
             {
-              "name": "Milos Kerkez",
-              "ovr": 88,
+              "name": "이영표",
               "pos": "DF",
               "first": "FIRST",
-              "type": "FUTURE",
-              "emoji": "💗",
-              "manualX": 14.734299516908212,
-              "manualY": 33.81951855804577
+              "ovr": 87,
+              "type": "TAEGUEK",
+              "emoji": "🔹",
+              "manualX": 14.613526570048311,
+              "manualY": 34.57844183564568
             },
             {
               "name": "Jeremy Frimpong",
@@ -268,8 +268,8 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 83.45410628019324,
-              "manualY": 34.198980196845724
+              "manualX": 85.86956521739131,
+              "manualY": 34.3887110162457
             },
             {
               "name": "Virgil van Dijk",
@@ -343,11 +343,11 @@
             },
             {
               "name": "Vini Jr.",
-              "ovr": 89,
+              "ovr": 92,
               "pos": "FW",
               "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
+              "type": "FUTURE",
+              "emoji": "💗",
               "manualX": 21.256038647342994,
               "manualY": 80.68303094983992
             },
@@ -360,12 +360,30 @@
               "emoji": "➕"
             },
             {
-              "name": "Luis Figo",
-              "ovr": 89,
-              "pos": "FW",
+              "name": "Milos Kerkez",
+              "ovr": 88,
+              "pos": "DF",
               "first": "SUB",
               "type": "ICON",
-              "emoji": "⭐"
+              "emoji": "⭐",
+              "manualX": 14.734299516908212,
+              "manualY": 33.81951855804577
+            },
+            {
+              "name": "최진철",
+              "pos": "DF",
+              "first": "SUB",
+              "ovr": 86,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "설기현",
+              "pos": "FW",
+              "first": "SUB",
+              "ovr": 87,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
             },
             {
               "name": "Florian Wirtz",
@@ -448,6 +466,14 @@
               "emoji": "",
               "manualX": 50.24154589371981,
               "manualY": 41.02928969524487
+            },
+            {
+              "name": "Luis Figo",
+              "ovr": 89,
+              "pos": "FW",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐"
             }
           ]
         },
