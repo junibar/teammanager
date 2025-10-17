@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "GWANGJU",
+      "currentTeam": "DAEGU",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -80,6 +80,16 @@
               "manualY": 62.84833392624214
             },
             {
+              "name": "Rodrygo",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 90,
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 73.79227053140096,
+              "manualY": 82.77006996323965
+            },
+            {
               "name": "Erling Haaland",
               "pos": "FW",
               "first": "FIRST",
@@ -90,16 +100,6 @@
               "manualY": 87.13387880943911
             },
             {
-              "name": "Kylian Mbappe",
-              "pos": "FW",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 91,
-              "manualX": 69.20289855072464,
-              "manualY": 83.90845487963952
-            },
-            {
               "name": "Cristiano Ronaldo",
               "ovr": 94,
               "pos": "FW",
@@ -108,16 +108,6 @@
               "emoji": "⭐",
               "manualX": 26.32850241545894,
               "manualY": 82.95980078263963
-            },
-            {
-              "name": "Tijjani Reijnders",
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 86,
-              "manualX": 58.574879227053145,
-              "manualY": 64.74564212024191
             },
             {
               "name": "Angel Di Maria",
@@ -142,6 +132,26 @@
               "ovr": 85,
               "type": "TAEGUEK",
               "emoji": "🔹"
+            },
+            {
+              "name": "Kylian Mbappe",
+              "pos": "FW",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 91,
+              "manualX": 69.20289855072464,
+              "manualY": 83.90845487963952
+            },
+            {
+              "name": "Tijjani Reijnders",
+              "pos": "MF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 86,
+              "manualX": 58.574879227053145,
+              "manualY": 64.74564212024191
             },
             {
               "name": "Geronimo Rulli",
