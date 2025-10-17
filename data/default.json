@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEGU",
+      "currentTeam": "DAEJEON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -104,8 +104,8 @@
               "pos": "FW",
               "first": "FIRST",
               "ovr": 90,
-              "type": "ICON",
-              "emoji": "⭐",
+              "type": "FUTURE",
+              "emoji": "💗",
               "manualX": 69.32367149758454,
               "manualY": 83.52899324083955
             },
@@ -262,12 +262,12 @@
               "emoji": ""
             },
             {
-              "name": "이영표",
+              "name": "Theo Hernandez",
               "pos": "DF",
               "first": "FIRST",
-              "ovr": 87,
-              "type": "TAEGUEK",
-              "emoji": "🔹",
+              "ovr": 86,
+              "type": "NORMAL",
+              "emoji": "",
               "manualX": 14.613526570048311,
               "manualY": 34.57844183564568
             },
@@ -396,6 +396,14 @@
               "emoji": "🔹"
             },
             {
+              "name": "기성용",
+              "pos": "MF",
+              "first": "SUB",
+              "ovr": 87,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
               "name": "Florian Wirtz",
               "ovr": 89,
               "pos": "MF",
@@ -420,8 +428,8 @@
               "emoji": ""
             },
             {
-              "name": "Eduardo Camavinga",
-              "ovr": 83,
+              "name": "Alex Baena",
+              "ovr": 84,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
@@ -436,8 +444,8 @@
               "emoji": ""
             },
             {
-              "name": "Alex Baena",
-              "ovr": 84,
+              "name": "Eduardo Camavinga",
+              "ovr": 83,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
