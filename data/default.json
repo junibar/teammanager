@@ -50,6 +50,16 @@
               "manualY": 31.23187993860497
             },
             {
+              "name": "Bruno Fernandes",
+              "pos": "MF",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 87,
+              "manualX": 37.80193236714976,
+              "manualY": 61.52021819044231
+            },
+            {
               "name": "Rodri",
               "pos": "MF",
               "first": "FIRST",
@@ -60,44 +70,14 @@
               "manualY": 44.44444444444444
             },
             {
-              "name": "Bruno Fernandes",
-              "pos": "MF",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 87,
-              "manualX": 38.526570048309175,
-              "manualY": 59.62290999644255
-            },
-            {
               "name": "Yaya Toure",
               "pos": "MF",
               "first": "FIRST",
               "ovr": 87,
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 58.69565217391305,
-              "manualY": 62.84833392624214
-            },
-            {
-              "name": "Rodrygo",
-              "pos": "FW",
-              "first": "FIRST",
-              "ovr": 90,
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 73.79227053140096,
-              "manualY": 82.77006996323965
-            },
-            {
-              "name": "Erling Haaland",
-              "pos": "FW",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "ovr": 90,
-              "manualX": 48.309178743961354,
-              "manualY": 87.13387880943911
+              "manualX": 59.29951690821256,
+              "manualY": 62.46887228744219
             },
             {
               "name": "Cristiano Ronaldo",
@@ -108,6 +88,26 @@
               "emoji": "⭐",
               "manualX": 26.32850241545894,
               "manualY": 82.95980078263963
+            },
+            {
+              "name": "Erling Haaland",
+              "pos": "FW",
+              "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "ovr": 90,
+              "manualX": 47.22222222222222,
+              "manualY": 92.8258033914384
+            },
+            {
+              "name": "Rodrygo",
+              "pos": "FW",
+              "first": "FIRST",
+              "ovr": 90,
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 69.32367149758454,
+              "manualY": 83.52899324083955
             },
             {
               "name": "Angel Di Maria",
