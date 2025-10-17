@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "GWANGJU",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -1058,7 +1058,7 @@
             {
               "name": "이영표",
               "pos": "DF",
-              "first": "SUB",
+              "first": "FIRST",
               "ovr": 87,
               "type": "TAEGUEK",
               "emoji": "🔹",
@@ -1068,7 +1068,7 @@
             {
               "name": "Nico Schlotterbeck",
               "pos": "DF",
-              "first": "SUB",
+              "first": "FIRST",
               "ovr": 85,
               "type": "NORMAL",
               "emoji": "",
@@ -1088,7 +1088,7 @@
             {
               "name": "Daniel Alves",
               "pos": "DF",
-              "first": "SUB",
+              "first": "FIRST",
               "ovr": 89,
               "type": "ICON",
               "emoji": "⭐",
@@ -1138,7 +1138,7 @@
             {
               "name": "Lionel Messi",
               "pos": "FW",
-              "first": "SUB",
+              "first": "FIRST",
               "ovr": 95,
               "type": "ICON",
               "emoji": "⭐",
@@ -1148,7 +1148,7 @@
             {
               "name": "Jude Bellingham",
               "pos": "MF",
-              "first": "SUB",
+              "first": "FIRST",
               "ovr": 92,
               "type": "FUTURE",
               "emoji": "💗",
