@@ -1319,10 +1319,10 @@
         "TEAM B": {
           "roster": [
             {
-              "name": "GK",
+              "name": "Yann Sommer",
               "pos": "GK",
               "first": "FIRST",
-              "ovr": 75,
+              "ovr": 87,
               "type": "NORMAL",
               "emoji": ""
             },
@@ -1411,5 +1411,5 @@
       }
     }
   },
-  "currentPlayer": "JUNIBAR"
+  "currentPlayer": "D0PAM1NE"
 }
