@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "DAEJEON",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -850,8 +850,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 60.26570048309179,
-              "manualY": 26.23028578204672
+              "manualX": 60.99033816425121,
+              "manualY": 25.66109332384679
             },
             {
               "name": "Declan Rice",
@@ -860,8 +860,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 38.28502415458937,
-              "manualY": 48.61852247124393
+              "manualX": 38.768115942028984,
+              "manualY": 49.5671765682438
             },
             {
               "name": "Martin Odegaard",
@@ -870,8 +870,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 46.4975845410628,
-              "manualY": 65.88402703664177
+              "manualX": 47.70531400966183,
+              "manualY": 63.03806474564212
             },
             {
               "name": "Moises Caicedo",
@@ -880,8 +880,8 @@
               "ovr": 90,
               "type": "FUTURE",
               "emoji": "💗",
-              "manualX": 57.729468599033815,
-              "manualY": 50.13636902644373
+              "manualX": 58.091787439613526,
+              "manualY": 48.8082532906439
             },
             {
               "name": "Jonathan David",
@@ -924,18 +924,16 @@
               "manualY": 65.12510375904186
             },
             {
-              "name": "Frank Lampard",
-              "ovr": 87,
-              "pos": "MF",
-              "first": "SUB",
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 39.61352657004831,
-              "manualY": 61.89967982924226
-            },
-            {
               "name": "야잔",
               "pos": "DF",
+              "first": "SUB",
+              "ovr": 87,
+              "type": "TAEGUEK",
+              "emoji": "🔹"
+            },
+            {
+              "name": "안정환",
+              "pos": "MF",
               "first": "SUB",
               "ovr": 87,
               "type": "TAEGUEK",
@@ -996,6 +994,16 @@
               "first": "SUB",
               "type": "NORMAL",
               "emoji": ""
+            },
+            {
+              "name": "Frank Lampard",
+              "ovr": 87,
+              "pos": "MF",
+              "first": "SUB",
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 39.61352657004831,
+              "manualY": 61.89967982924226
             },
             {
               "name": "Owen Wijndal",
@@ -1060,6 +1068,14 @@
               "first": "SUB",
               "type": "NORMAL",
               "emoji": ""
+            },
+            {
+              "name": "Ruud Gullit",
+              "pos": "MF",
+              "first": "SUB",
+              "ovr": 90,
+              "type": "ICON",
+              "emoji": "⭐"
             }
           ]
         },
@@ -1537,5 +1553,5 @@
       }
     }
   },
-  "currentPlayer": "D0PAM1NE"
+  "currentPlayer": "JUNIBAR"
 }
