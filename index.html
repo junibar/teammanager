@@ -76,13 +76,29 @@ button[disabled]{opacity:.45;pointer-events:none}
   <section id="center" class="card"><header><h2>전술 보드</h2></header><div class="body">
     <div id="pitchWrap"><canvas id="pitch"></canvas></div>
     <div class="sep"></div>
+    <!-- TARGET Panel -->
+<div id="targetsPanel" style="margin-top:10px">
+  <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">TARGET 명단</h3>
+  <table id="targetsTable">
+    <thead>
+      <tr>
+        <th style="width:38%">이름</th>
+        <th style="width:18%">포지션</th>
+        <th style="width:18%">OVR</th>
+        <th style="width:18%">선수타입</th>
+        <th style="width:90px"></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
     <div id="subsPanel">
       <div id="subsToolbar" style="display:flex;gap:8px;align-items:center;justify-content:flex-start;margin:0 0 8px 0;">
         <button id="saveBtn" class="good" title="(Ctrl+S)">저장</button>
         <button id="clearManualBtn" class="ghost">수동 위치 초기화</button>
         <button id="forceReflowBtn" class="ghost">강제 재배치</button>
       </div>
-      <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">TARGET,SUB 명단 (최대 10명)</h3>
+      <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">SUB 명단 (최대 10명)</h3>
       <table id="subsTable"><thead><tr>
         <th style="width:38%">이름</th><th style="width:18%">포지션</th><th style="width:18%">OVR</th><th style="width:18%">선수타입</th><th style="width:90px"></th>
       </tr></thead><tbody></tbody></table>
@@ -250,7 +266,7 @@ async function initStateThenBoot(){
       ctx.strokeText(String(ovr),x,y+22);ctx.fillText(String(ovr),x,y+22);
     }
   }
-  function draw(){drawPitch();drawPlayers();refreshSubs()}
+  function draw(){drawPitch();drawPlayers();refreshSubs();refreshTargets()}
   let drag=-1;const hit=(mx,my)=>{const ts=tokens();for(let i=ts.length-1;i>=0;i--){const {x,y}=xyToCanvas(ts[i].x,ts[i].y);const dx=mx-x,dy=my-y;if(dx*dx+dy*dy<=24*24)return i}return-1}
   const tokRef=(idx)=>{const ts=tokens();if(idx<0||idx>=ts.length)return null;const tk=ts[idx];const p=curT().roster.find(pp=>pp===tk.p);return{tk,p}}
   pitch.addEventListener("mousedown",(e)=>{const r=pitch.getBoundingClientRect();const mx=(e.clientX-r.left),my=(e.clientY-r.top);drag=hit(mx,my);if(drag>=0)e.preventDefault()});
@@ -330,6 +346,21 @@ async function initStateThenBoot(){
     const tmp=r[a]; r[a]=r[b]; r[b]=tmp;
     return true;
   }
+  function moveTargetByOne(team, targetRosterIndex, dir){
+  const r = team.roster;
+  const tgtIdxs = r.map((p,i)=>({p,i}))
+                   .filter(x => x.p.first === "TARGET")
+                   .map(x => x.i);
+  const pos = tgtIdxs.indexOf(targetRosterIndex);
+  if (pos === -1) return false;
+
+  const to = pos + dir;
+  if (to < 0 || to >= tgtIdxs.length) return false;
+
+  const a = tgtIdxs[pos], b = tgtIdxs[to];
+  const tmp = r[a]; r[a] = r[b]; r[b] = tmp;
+  return true;
+}
   function idxInRoster(team, playerObj){return team.roster.findIndex(x=>x===playerObj)}
 
   // SUB 패널
@@ -360,6 +391,68 @@ async function initStateThenBoot(){
       tb.appendChild(tr);
     });
   }
+function refreshTargets(){
+  const team = curT();
+  const targets = (team.roster || []).filter(p => p.first === "TARGET");
+  const tb = document.querySelector("#targetsTable tbody");
+  if (!tb) return;
+
+  tb.innerHTML = "";
+
+  if (targets.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 5;
+    td.textContent = 'TARGET 명단이 비어 있습니다.';
+    td.style.color = '#8aa0b6';
+    tr.appendChild(td);
+    tb.appendChild(tr);
+    // 헤더 수량 초기화
+    const h0 = document.querySelector('#targetsPanel h3');
+    if (h0) h0.textContent = 'TARGET 명단 (0)';
+    return;
+  }
+
+  const idxInRoster = (team, obj) => team.roster.findIndex(x => x === obj);
+
+  targets.forEach((p, idx) => {
+    const tr = document.createElement("tr");
+    const mark = TYPE_EMOJI[p.type] || "일반";
+    tr.innerHTML = `
+      <td>${p.name || ""}</td>
+      <td>${p.pos || ""}</td>
+      <td>${p.ovr ?? ""}</td>
+      <td>${mark}</td>
+      <td class="subs-actions">
+        <button class="ghost subsBtn btnUp"   ${idx===0?'disabled':''}>&#9650;</button>
+        <button class="ghost subsBtn btnDown" ${idx===targets.length-1?'disabled':''}>&#9660;</button>
+      </td>
+    `;
+
+    const up = tr.querySelector(".btnUp");
+    const dn = tr.querySelector(".btnDown");
+
+    up && up.addEventListener("click", () => {
+      const i = idxInRoster(team, p);
+      if (moveTargetByOne(team, i, -1)){
+        saveAll(); refreshTargets(); refreshRoster(); draw();
+      }
+    });
+
+    dn && dn.addEventListener("click", () => {
+      const i = idxInRoster(team, p);
+      if (moveTargetByOne(team, i, +1)){
+        saveAll(); refreshTargets(); refreshRoster(); draw();
+      }
+    });
+
+    tb.appendChild(tr);
+  });
+
+  // 헤더에 수량 표시
+  const h = document.querySelector('#targetsPanel h3');
+  if (h) h.textContent = `TARGET 명단 (${targets.length})`;
+}
 
   // 상단 셀렉터
   function refreshSelectors(){
