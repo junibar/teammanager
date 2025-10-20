@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SEOUL",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -512,8 +512,8 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 15.096618357487923,
-              "manualY": 76.69868374244041
+              "manualX": 19.685990338164252,
+              "manualY": 23.76378512984703
             },
             {
               "name": "홍명보",
@@ -522,8 +522,8 @@
               "ovr": 89,
               "type": "TAEGUEK",
               "emoji": "🔹",
-              "manualX": 50,
-              "manualY": 24.522708407446935
+              "manualX": 60.38647342995169,
+              "manualY": 23.384323491047077
             },
             {
               "name": "Gabriel Magalhaes",
@@ -532,8 +532,8 @@
               "ovr": 88,
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 32.850241545893724,
-              "manualY": 46.341752638444206
+              "manualX": 39.85507246376812,
+              "manualY": 24.143246768646982
             },
             {
               "name": "전민광",
@@ -542,8 +542,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 72.10144927536231,
-              "manualY": 48.99798411004387
+              "manualX": 81.40096618357488,
+              "manualY": 26.4200166014467
             },
             {
               "name": "Joao Neves",
@@ -552,8 +552,8 @@
               "ovr": 85,
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 51.20772946859904,
-              "manualY": 46.15202181904423
+              "manualX": 43.71980676328502,
+              "manualY": 52.7926004980434
             },
             {
               "name": "Zico",
@@ -562,8 +562,8 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 74.15458937198068,
-              "manualY": 71.38622079924107
+              "manualX": 60.38647342995169,
+              "manualY": 53.17206213684336
             },
             {
               "name": "박지성",
@@ -572,8 +572,8 @@
               "ovr": 90,
               "type": "TAEGUEK",
               "emoji": "🔹",
-              "manualX": 37.56038647342995,
-              "manualY": 68.35052768884145
+              "manualX": 26.570048309178745,
+              "manualY": 67.78133523064153
             },
             {
               "name": "Alexander Isak",
@@ -582,8 +582,8 @@
               "ovr": 88,
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 44.20289855072464,
-              "manualY": 89.03118700343887
+              "manualX": 40.21739130434783,
+              "manualY": 88.65172536463892
             },
             {
               "name": "Bukayo Saka",
@@ -592,8 +592,8 @@
               "first": "FIRST",
               "type": "FUTURE",
               "emoji": "💗",
-              "manualX": 59.05797101449275,
-              "manualY": 79.73437685284004
+              "manualX": 73.30917874396135,
+              "manualY": 74.04245227084074
             },
             {
               "name": "Harry Kane",
@@ -602,8 +602,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 51.449275362318836,
-              "manualY": 62.08941064864224
+              "manualX": 57.2463768115942,
+              "manualY": 85.99549389303925
             },
             {
               "name": "안데르손",
@@ -800,7 +800,7 @@
             {
               "name": "Roberto Carlos",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 90,
               "type": "ICON",
               "emoji": "⭐",
@@ -810,7 +810,7 @@
             {
               "name": "차두리",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 88,
               "type": "TAEGUEK",
               "emoji": "🔹",
@@ -820,7 +820,7 @@
             {
               "name": "Willian Pacho",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 90,
               "type": "ICON",
               "emoji": "⭐",
@@ -834,8 +834,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 60.99033816425121,
-              "manualY": 25.66109332384679
+              "manualX": 60.38647342995169,
+              "manualY": 24.522708407446935
             },
             {
               "name": "Declan Rice",
@@ -854,13 +854,13 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 47.70531400966183,
-              "manualY": 63.03806474564212
+              "manualX": 47.34299516908212,
+              "manualY": 67.40187359184158
             },
             {
               "name": "Moises Caicedo",
               "pos": "MF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 90,
               "type": "FUTURE",
               "emoji": "💗",
@@ -1160,8 +1160,8 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 50.1207729468599,
-              "manualY": 88.27226372583897
+              "manualX": 48.91304347826087,
+              "manualY": 90.54903355863868
             },
             {
               "name": "Lionel Messi",
