@@ -1092,7 +1092,7 @@
             {
               "name": "이영표",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 87,
               "type": "TAEGUEK",
               "emoji": "🔹",
@@ -1102,7 +1102,7 @@
             {
               "name": "Nico Schlotterbeck",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 85,
               "type": "NORMAL",
               "emoji": "",
@@ -1122,22 +1122,12 @@
             {
               "name": "송종국",
               "pos": "DF",
-              "first": "FIRST",
+              "first": "TARGET",
               "ovr": 87,
               "type": "TAEGUEK",
               "emoji": "🔹",
               "manualX": 83.81642512077295,
               "manualY": 32.681133641645914
-            },
-            {
-              "name": "Lothar Matthaus",
-              "ovr": 90,
-              "pos": "MF",
-              "first": "FIRST",
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 40.82125603864734,
-              "manualY": 48.23906083244397
             },
             {
               "name": "이을용",
@@ -1150,14 +1140,24 @@
               "manualY": 48.61852247124393
             },
             {
-              "name": "Victor Osimhen",
-              "ovr": 87,
-              "pos": "FW",
-              "first": "FIRST",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 50.1207729468599,
-              "manualY": 88.27226372583897
+              "name": "Lothar Matthaus",
+              "ovr": 90,
+              "pos": "MF",
+              "first": "TARGET",
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 40.82125603864734,
+              "manualY": 48.23906083244397
+            },
+            {
+              "name": "Jude Bellingham",
+              "pos": "MF",
+              "first": "TARGET",
+              "ovr": 92,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 50.36231884057971,
+              "manualY": 63.607257203842046
             },
             {
               "name": "Dirk Kuyt",
@@ -1170,9 +1170,19 @@
               "manualY": 77.07814538124038
             },
             {
-              "name": "Lionel Messi",
+              "name": "Victor Osimhen",
+              "ovr": 87,
               "pos": "FW",
               "first": "FIRST",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 50.1207729468599,
+              "manualY": 88.27226372583897
+            },
+            {
+              "name": "Lionel Messi",
+              "pos": "FW",
+              "first": "TARGET",
               "ovr": 95,
               "type": "ICON",
               "emoji": "⭐",
@@ -1180,20 +1190,10 @@
               "manualY": 76.12949128424049
             },
             {
-              "name": "Jude Bellingham",
-              "pos": "MF",
+              "name": "Antoine Griezmann",
+              "pos": "FW",
               "first": "FIRST",
-              "ovr": 92,
-              "type": "FUTURE",
-              "emoji": "💗",
-              "manualX": 50.36231884057971,
-              "manualY": 63.607257203842046
-            },
-            {
-              "name": "Ugurcan Cakir",
-              "ovr": 79,
-              "pos": "GK",
-              "first": "SUB",
+              "ovr": 85,
               "type": "NORMAL",
               "emoji": ""
             },
@@ -1208,6 +1208,16 @@
               "manualY": 63.03806474564212
             },
             {
+              "name": "Davinson Sanchez",
+              "ovr": 82,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 84.05797101449275,
+              "manualY": 22.056207755247243
+            },
+            {
               "name": "Yankuba Minteh",
               "ovr": 77,
               "pos": "MF",
@@ -1218,14 +1228,22 @@
               "manualY": 79.54464603344006
             },
             {
-              "name": "Davinson Sanchez",
-              "ovr": 82,
+              "name": "Sead Kolasinac",
+              "ovr": 80,
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 84.05797101449275,
-              "manualY": 22.056207755247243
+              "manualX": 16.183574879227052,
+              "manualY": 32.30167200284596
+            },
+            {
+              "name": "Ugurcan Cakir",
+              "ovr": 79,
+              "pos": "GK",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": ""
             },
             {
               "name": "Rui Patricio",
@@ -1242,26 +1260,8 @@
               "first": "SUB",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 82.85024154589372,
-              "manualY": 31.92221036404601
-            },
-            {
-              "name": "Sead Kolasinac",
-              "ovr": 80,
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 16.183574879227052,
-              "manualY": 32.30167200284596
-            },
-            {
-              "name": "Kaan Ayhan",
-              "ovr": 75,
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
+              "manualX": 17.632850241545896,
+              "manualY": 18.261591367247718
             },
             {
               "name": "Odilon Kossounou",
@@ -1272,16 +1272,26 @@
               "emoji": ""
             },
             {
-              "name": "Berat Djimsiti",
-              "ovr": 79,
+              "name": "Giorgio Scalvini",
+              "ovr": 78,
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
               "emoji": ""
             },
             {
-              "name": "Giorgio Scalvini",
-              "ovr": 78,
+              "name": "Kaan Ayhan",
+              "ovr": 75,
+              "pos": "DF",
+              "first": "SUB",
+              "type": "NORMAL",
+              "emoji": "",
+              "manualX": 82.85024154589372,
+              "manualY": 22.435669394047196
+            },
+            {
+              "name": "Berat Djimsiti",
+              "ovr": 79,
               "pos": "DF",
               "first": "SUB",
               "type": "NORMAL",
@@ -1304,14 +1314,6 @@
               "emoji": ""
             },
             {
-              "name": "Nikola Krstovic",
-              "ovr": 75,
-              "pos": "FW",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
               "name": "Brajan Gruda",
               "ovr": 74,
               "pos": "MF",
@@ -1322,22 +1324,6 @@
             {
               "name": "Gabriel Sara",
               "ovr": 79,
-              "pos": "MF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Diego Coppola",
-              "ovr": 72,
-              "pos": "DF",
-              "first": "SUB",
-              "type": "NORMAL",
-              "emoji": ""
-            },
-            {
-              "name": "Eyup Aydin",
-              "ovr": 67,
               "pos": "MF",
               "first": "SUB",
               "type": "NORMAL",
