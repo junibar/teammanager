@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SUWON",
+      "currentTeam": "SEOUL",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -512,8 +512,8 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 19.685990338164252,
-              "manualY": 23.76378512984703
+              "manualX": 22.82608695652174,
+              "manualY": 36.09628839084549
             },
             {
               "name": "홍명보",
@@ -542,8 +542,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 81.40096618357488,
-              "manualY": 26.4200166014467
+              "manualX": 77.29468599033817,
+              "manualY": 35.33736511324558
             },
             {
               "name": "Joao Neves",
@@ -552,8 +552,8 @@
               "ovr": 85,
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 43.71980676328502,
-              "manualY": 52.7926004980434
+              "manualX": 40.57971014492754,
+              "manualY": 54.12071623384323
             },
             {
               "name": "Zico",
@@ -562,8 +562,8 @@
               "first": "FIRST",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 60.38647342995169,
-              "manualY": 53.17206213684336
+              "manualX": 59.90338164251207,
+              "manualY": 53.551523775643304
             },
             {
               "name": "박지성",
