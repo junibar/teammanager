@@ -82,7 +82,7 @@ button[disabled]{opacity:.45;pointer-events:none}
         <button id="clearManualBtn" class="ghost">수동 위치 초기화</button>
         <button id="forceReflowBtn" class="ghost">강제 재배치</button>
       </div>
-      <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">SUB 명단 (최대 10명)</h3>
+      <h3 style="margin:4px 0 8px 0;font-size:13px;color:#cdd7e6">TARGET,SUB 명단 (최대 10명)</h3>
       <table id="subsTable"><thead><tr>
         <th style="width:38%">이름</th><th style="width:18%">포지션</th><th style="width:18%">OVR</th><th style="width:18%">선수타입</th><th style="width:90px"></th>
       </tr></thead><tbody></tbody></table>
@@ -335,7 +335,7 @@ async function initStateThenBoot(){
   // SUB 패널
   function refreshSubs(){
     const team=curT();
-    const subs=(team.roster||[]).filter(p=>p.first!=="FIRST").slice(0,10);
+    const subs=(team.roster||[]).filter(p=>p.first!=="FIRST").slice(0,18);
     const tb=qs("#subsTable tbody"); tb.innerHTML="";
     if(subs.length===0){
       const tr=document.createElement('tr'); const td=document.createElement('td');
