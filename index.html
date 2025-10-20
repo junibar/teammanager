@@ -321,7 +321,7 @@ async function initStateThenBoot(){
   // SUB 재정렬 유틸
   function moveSubByOne(team, subRosterIndex, dir){
     const r=team.roster;
-    const subIdxs=r.map((p,i)=>({p,i})).filter(x=>x.p.first!=="FIRST").map(x=>x.i);
+    const subIdxs=r.map((p,i)=>({p,i})).filter(x=>x.p.first==="SUB").map(x=>x.i);
     const pos=subIdxs.indexOf(subRosterIndex);
     if(pos===-1)return false;
     const target=pos+dir;
@@ -335,7 +335,7 @@ async function initStateThenBoot(){
   // SUB 패널
   function refreshSubs(){
     const team=curT();
-    const subs=(team.roster||[]).filter(p=>p.first!=="FIRST").slice(0,18);
+    const subs=(team.roster||[]).filter(p=>p.first==="SUB").slice(0,18);
     const tb=qs("#subsTable tbody"); tb.innerHTML="";
     if(subs.length===0){
       const tr=document.createElement('tr'); const td=document.createElement('td');
