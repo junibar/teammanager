@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SUWON",
+      "currentTeam": "DAEGU",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -56,8 +56,8 @@
               "type": "NORMAL",
               "emoji": "",
               "ovr": 87,
-              "manualX": 40.45893719806764,
-              "manualY": 62.84833392624214
+              "manualX": 38.526570048309175,
+              "manualY": 60.38183327404245
             },
             {
               "name": "Rodri",
@@ -70,14 +70,14 @@
               "manualY": 44.44444444444444
             },
             {
-              "name": "Yaya Toure",
+              "name": "Matheus Cunha",
               "pos": "MF",
               "first": "FIRST",
-              "ovr": 87,
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 58.69565217391305,
-              "manualY": 61.52021819044231
+              "ovr": 86,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 59.90338164251207,
+              "manualY": 60.19210245464247
             },
             {
               "name": "Cristiano Ronaldo",
