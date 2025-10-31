@@ -1,7 +1,7 @@
 {
   "players": {
     "JUNIBAR": {
-      "currentTeam": "SEOUL",
+      "currentTeam": "SUWON",
       "teams": {
         "DAEGU": {
           "roster": [
@@ -1074,24 +1074,24 @@
               "emoji": ""
             },
             {
-              "name": "이영표",
+              "name": "홍명보",
               "pos": "DF",
               "first": "TARGET",
-              "ovr": 87,
+              "ovr": 89,
               "type": "TAEGUEK",
               "emoji": "🔹",
-              "manualX": 16.425120772946862,
-              "manualY": 32.30167200284596
+              "manualX": 68.59903381642512,
+              "manualY": 26.609747420846674
             },
             {
-              "name": "Nico Schlotterbeck",
+              "name": "Giacintto Facchetti",
               "pos": "DF",
               "first": "TARGET",
-              "ovr": 85,
-              "type": "NORMAL",
-              "emoji": "",
-              "manualX": 38.64734299516908,
-              "manualY": 21.866476935847267
+              "ovr": 89,
+              "type": "ICON",
+              "emoji": "⭐",
+              "manualX": 31.88405797101449,
+              "manualY": 26.989209059646623
             },
             {
               "name": "Franz Beckenbauer",
@@ -1100,18 +1100,18 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 61.95652173913043,
-              "manualY": 22.056207755247243
+              "manualX": 50.60386473429952,
+              "manualY": 29.07624807304637
             },
             {
-              "name": "송종국",
+              "name": "Jeremie Frimpong",
               "pos": "DF",
               "first": "TARGET",
-              "ovr": 87,
-              "type": "TAEGUEK",
-              "emoji": "🔹",
-              "manualX": 83.81642512077295,
-              "manualY": 32.681133641645914
+              "ovr": 89,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 88.88888888888889,
+              "manualY": 57.15640934424285
             },
             {
               "name": "이을용",
@@ -1120,8 +1120,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 60.26570048309179,
-              "manualY": 48.61852247124393
+              "manualX": 10.024154589371982,
+              "manualY": 55.2591011502431
             },
             {
               "name": "Lothar Matthaus",
@@ -1130,18 +1130,18 @@
               "first": "TARGET",
               "type": "ICON",
               "emoji": "⭐",
-              "manualX": 40.82125603864734,
-              "manualY": 48.23906083244397
+              "manualX": 58.93719806763285,
+              "manualY": 53.74125459504329
             },
             {
-              "name": "Jude Bellingham",
+              "name": "Moises Caicedo",
               "pos": "MF",
               "first": "TARGET",
-              "ovr": 92,
+              "ovr": 90,
               "type": "FUTURE",
               "emoji": "💗",
-              "manualX": 50.36231884057971,
-              "manualY": 63.607257203842046
+              "manualX": 38.768115942028984,
+              "manualY": 52.982331317443375
             },
             {
               "name": "Dirk Kuyt",
@@ -1150,8 +1150,8 @@
               "first": "FIRST",
               "type": "AMIGO",
               "emoji": "➕",
-              "manualX": 27.294685990338163,
-              "manualY": 75.37056800664058
+              "manualX": 33.33333333333333,
+              "manualY": 78.59599193644019
             },
             {
               "name": "Victor Osimhen",
@@ -1160,18 +1160,18 @@
               "first": "FIRST",
               "type": "NORMAL",
               "emoji": "",
-              "manualX": 48.91304347826087,
-              "manualY": 90.54903355863868
+              "manualX": 50.48309178743962,
+              "manualY": 89.79011028103876
             },
             {
-              "name": "Lionel Messi",
+              "name": "Julian Alvarez",
               "pos": "FW",
               "first": "TARGET",
-              "ovr": 95,
-              "type": "ICON",
-              "emoji": "⭐",
-              "manualX": 70.16908212560386,
-              "manualY": 75.1808371872406
+              "ovr": 89,
+              "type": "FUTURE",
+              "emoji": "💗",
+              "manualX": 66.78743961352657,
+              "manualY": 76.88841456184039
             },
             {
               "name": "Antoine Griezmann",
